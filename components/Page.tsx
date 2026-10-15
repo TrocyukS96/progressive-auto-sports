@@ -1,0 +1,2 @@
+import pages from '@/data/pages.json';import site from '@/data/site.json';import Content from './Content';import Navigation from './Navigation';
+export default function Page({route}:{route:keyof typeof pages}){return <><div className={`wrap container ${pages[route].bodyClass}`}><Content html={site.decor}/><Content html={site.header}/><Navigation/><main><Content html={pages[route].html}/></main></div><Content html={site.footer}/></>}

@@ -1,0 +1,3 @@
+'use client';
+import Link from 'next/link';import {usePathname} from 'next/navigation';import {useState} from 'react';import site from '@/data/site.json';
+export default function Navigation(){const pathname=usePathname();const [open,setOpen]=useState(false);return <nav className="copy-nav" aria-label="Primary navigation"><button className="copy-menu" onClick={()=>setOpen(!open)} aria-expanded={open}>Menu</button><ul className={open?'copy-links open':'copy-links'}>{site.nav.map(item=><li key={item.href}><Link href={item.href} onClick={()=>setOpen(false)} aria-current={pathname.replace(/\/$/,'')===item.href.replace(/\/$/,'')?'page':undefined}>{item.label}</Link></li>)}</ul></nav>}

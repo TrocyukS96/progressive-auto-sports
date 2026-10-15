@@ -1,0 +1,43 @@
+{
+  "header": "<header class=\"banner\" role=\"banner\">\n  <div class=\"row header-brand\">\n    <div class=\"col-sm-6 col-md-4 social-icons\">\n      <div class=\"social-link\">\n                      <ul>\n                              <li>\n                  <a href=\"https://www.facebook.com/pages/Progressive-Autosports/162798422240\" title=\"Facebook\" target=\"_blank\" rel=\"noopener noreferrer\">\n                    <i class=\"fa fa-facebook\"></i>\n                  </a>\n                </li>\n                              <li>\n                  <a href=\"http://instagram.com/progressiveautosport\" title=\"Instagram\" target=\"_blank\" rel=\"noopener noreferrer\">\n                    <i class=\"fa fa-instagram\"></i>\n                  </a>\n                </li>\n                          </ul>\n                  </div>\n    </div>\n\n    <div class=\"col-sm-6 col-md-4 col-md-push-4 call-number\">\n                  <a href=\"tel:281-893-1134\" target=\"_blank\" rel=\"noopener noreferrer\"> <i class=\"fa fa-phone\"></i> 281-893-1134 </a>\n    </div>\n\n    <div class=\"col-sm-12 col-md-4 col-md-pull-4 logo\">\n      <a class=\"top-brand\" href=\"/\">\n                <img class=\"img-responsive\" src=\"/assets/1bf4a751b55b-prog-auto-logo.png\" alt=\"progressive-logo\" loading=\"lazy\">\n      </a>\n    </div>\n  </div>\n\n\n  </header>\n\n    ",
+  "footer": "<section class=\"footer-widget-block\">\n  <div class=\"footer-triangle\"></div>\n\n  <div class=\"container\">\n    <section class=\"widget instagram-feed\">Instagram has returned invalid data.</section>  </div>\n</section>\n<footer class=\"content-info\" role=\"contentinfo\">\n  <div class=\"container\">\n\n    <div class=\"row partner-logo\">\n      <div class=\"col-sm-12\">\n        <span class=\"footer-line\"></span>\n        <div class=\"footer-logo\">\n                    <a href=\"/\"><img src=\"/assets/647fb583167f-image-footer-logo.png\" alt=\"Image Is Everything\" loading=\"lazy\"></a>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row info-block\">\n\n      <address class=\"col-md-6 contact\">\n        <div class=\"row\">\n\n                    <div class=\"col-xs-12 col-sm-6 address\">\n            14037 Stuebner Airline Rd<br>\nHouston, TX 77069          </div>\n\n          <div class=\"col-xs-12 col-sm-6 phone-email\">\n            281-893-1134<br>\n            <a href=\"mailto:sales@progressiveautosports.com\">sales<b>@</b>progressiveautosports.com</a>\n          </div>\n\n        </div>\n      </address>\n\n      <div class=\"col-md-6 copyright\">\n                <div class=\"copy\">© 2021 Progressive Autosports, All Rights Reserved.</div>\n\n        <div class=\"footer-nav\">\n          <nav class=\"nav-footer\" role=\"navigation\">\n            <ul id=\"menu-footer-navigation\" class=\"footer-nav list-inline\"><li class=\"menu-motor-sales\"><a href=\"/motor-sales-2/\">Motor Sales</a></li>\n<li class=\"menu-privacy-policy\"><a href=\"/privacy-policy/\">Privacy Policy</a></li>\n<li class=\"menu-web-design\"><a title=\"Design &amp; Development\" target=\"_blank\" href=\"https://meshcreative.co\" rel=\"noopener noreferrer\">Web Design</a></li>\n</ul>          </nav>\n        </div>\n\n      </div>\n\n    </div>\n\n  </div>\n</footer>\n\n",
+  "decor": "<span class=\"wrap-left-texture\"></span>\n    <span class=\"wrapper-logo\"></span>\n    <span class=\"wrap-right-texture\"></span>\n\n    ",
+  "nav": [
+    {
+      "href": "/",
+      "label": "Home"
+    },
+    {
+      "href": "/wheels/",
+      "label": "Wheels"
+    },
+    {
+      "href": "/motor-sales-2/",
+      "label": "Motor Sales"
+    },
+    {
+      "href": "/galleries/",
+      "label": "Gallery"
+    },
+    {
+      "href": "/services/",
+      "label": "Services"
+    },
+    {
+      "href": "/accessories/",
+      "label": "Accessories"
+    },
+    {
+      "href": "/press-media/",
+      "label": "Media"
+    },
+    {
+      "href": "/blog/",
+      "label": "Blog"
+    },
+    {
+      "href": "/contact/",
+      "label": "Contact"
+    }
+  ]
+}
