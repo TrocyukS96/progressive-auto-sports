@@ -2,10 +2,13 @@
   "name": "progressive-full-source",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "node scripts/start-standalone.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
