@@ -1,0 +1,107 @@
+'use client';
+
+import Link from 'next/link';
+import {usePathname} from 'next/navigation';
+import {ArrowUpRight, Menu} from 'lucide-react';
+import {useEffect, useState} from 'react';
+import {cn} from '@/src/shared/lib/cn';
+import {Button} from '@/src/shared/ui/button';
+import {Sheet, SheetContent, SheetTrigger} from '@/src/shared/ui/sheet';
+import {homeFontClass} from '../config/fonts';
+import {primaryNav, showroomLink} from '../config/content';
+import {HomeLogo} from './home-logo';
+
+const navLinkClass =
+  'home-nav-link inline-flex min-h-[44px] items-center px-[10px] text-[16px] font-medium text-[#F8F8F8] no-underline [text-shadow:0_1px_8px_rgb(0_0_0/0.55)] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]';
+
+const glassButtonClass =
+  'border-white/45 bg-white/15 shadow-none backdrop-blur-[14px] hover:border-white hover:bg-[#F8F8F8]';
+
+function isCurrent(pathname: string, href: string) {
+  const current = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  return current === href;
+}
+
+export function HomeHeader() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive: true});
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <header className="home-header fixed inset-x-0 top-0 z-30 bg-transparent px-[12px] pt-[10px] text-[#F8F8F8] min-[768px]:px-[24px] min-[1024px]:pt-[14px]">
+      <div
+        className={cn(
+          'mx-auto flex max-w-[1280px] items-center justify-between gap-[16px] rounded-[16px] border border-white/30 px-[22px] py-[16px] backdrop-blur-[16px] transition-colors duration-300 motion-reduce:transition-none min-[1024px]:px-[28px] min-[1024px]:py-[14px]',
+          scrolled ? 'bg-[#111315]/70' : 'bg-[#111315]/48',
+        )}
+      >
+        <HomeLogo priority />
+        <nav className="home-desktop-nav items-center" aria-label="Primary">
+          {primaryNav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={navLinkClass}
+              aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex items-center gap-[8px]">
+          <Button variant="outline" asChild className={`home-desktop-cta h-[36px] px-[16px] text-[15px] ${glassButtonClass}`}>
+            <Link href={showroomLink.href}>
+              {showroomLink.label}
+              <ArrowUpRight aria-hidden className="size-[16px]" />
+            </Link>
+          </Button>
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  'home-mobile-toggle border-white/45 bg-white/15 backdrop-blur-[14px] hover:bg-white/25 hover:text-[#F8F8F8]',
+                )}
+                aria-label="Open menu"
+                aria-expanded={open}
+              >
+                <Menu aria-hidden className="size-[22px]" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent title="Menu" className={homeFontClass} style={{fontFamily: 'var(--font-body), Inter, sans-serif'}}>
+              <nav className="flex flex-col" aria-label="Mobile">
+                {primaryNav.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="home-nav-link inline-flex min-h-[44px] items-center text-[18px] font-medium text-[#F8F8F8] no-underline [font-family:var(--font-body),sans-serif]"
+                    aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Link
+                  href={showroomLink.href}
+                  className="mt-[12px] inline-flex min-h-[44px] items-center gap-[8px] text-[18px] font-medium text-[#F8F8F8] no-underline"
+                  onClick={() => setOpen(false)}
+                >
+                  {showroomLink.label}
+                  <ArrowUpRight aria-hidden className="size-[16px]" />
+                </Link>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  );
+}
