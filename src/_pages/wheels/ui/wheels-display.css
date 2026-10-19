@@ -1,0 +1,35 @@
+.wheels-page a:hover,
+.wheels-page a:focus,
+.wheels-page a:focus-visible {
+  text-decoration: none;
+}
+
+.wheels-page a:focus {
+  outline: none;
+}
+
+.wheels-page a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.wheels-page input[type='search'] {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.wheels-page input[type='search']::-webkit-search-cancel-button,
+.wheels-page input[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.wheels-page input::placeholder {
+  color: #55595e;
+  opacity: 1;
+}
+
+.wheels-page label {
+  font-weight: 500;
+}

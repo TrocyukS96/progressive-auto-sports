@@ -2,13 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {cn} from '@/src/shared/lib/cn';
 
-type HomeLogoProps = {
+type SiteLogoProps = {
   className?: string;
   imageClassName?: string;
   priority?: boolean;
 };
 
-export function HomeLogo({className, imageClassName, priority = false}: HomeLogoProps) {
+export function SiteLogo({className, imageClassName, priority = false}: SiteLogoProps) {
   return (
     <Link
       href="/"

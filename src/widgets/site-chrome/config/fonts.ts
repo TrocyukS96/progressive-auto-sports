@@ -14,4 +14,4 @@ const body = Inter({
   display: 'swap',
 });
 
-export const homeFontClass = `${display.variable} ${body.variable}`;
+export const siteFontClass = `${display.variable} ${body.variable}`;

@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import {Mail, MapPin, Phone} from 'lucide-react';
 import type {SVGProps} from 'react';
-import {contact, copyright, footerNav, socialLinks, type HomeLink} from '../config/content';
-import {HomeLogo} from './home-logo';
+import {contact, copyright, footerNav, socialLinks, type SiteLink} from '../config/content';
+import {SiteLogo} from './site-logo';
+import './site-chrome.css';
 
 function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -29,7 +30,7 @@ const socialIcons = {
   Instagram: InstagramIcon,
 } as const;
 
-function FooterLink({item}: {item: HomeLink}) {
+function FooterLink({item}: {item: SiteLink}) {
   const className =
     'inline-flex min-h-[44px] items-center text-[15px] font-medium leading-none text-[#F8F8F8] no-underline hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]';
 
@@ -48,7 +49,7 @@ function FooterLink({item}: {item: HomeLink}) {
   );
 }
 
-function SocialLink({item}: {item: HomeLink}) {
+function SocialLink({item}: {item: SiteLink}) {
   const Icon = socialIcons[item.label as keyof typeof socialIcons];
   if (!Icon) return null;
 
@@ -67,13 +68,13 @@ function SocialLink({item}: {item: HomeLink}) {
 
 const eyebrow = 'm-0 text-[12px] font-medium uppercase tracking-[0.18em] text-[#C2C4C7]';
 
-export function HomeFooter() {
+export function SiteFooter() {
   return (
     <footer className="home-footer bg-[#111315] text-[#F8F8F8]">
       <div className="h-[2px] bg-[#ED343B]" />
       <div className="mx-auto max-w-[1280px] px-[16px] pt-[36px] pb-[28px] min-[768px]:px-[32px] min-[1024px]:pt-[48px] min-[1024px]:pb-[32px]">
         <div className="flex items-center justify-between gap-[16px] border-b border-white/10 pb-[28px]">
-          <HomeLogo imageClassName="h-[28px] min-[1024px]:h-[32px]" />
+          <SiteLogo imageClassName="h-[28px] min-[1024px]:h-[32px]" />
           <div className="flex items-center gap-[10px]">
             {socialLinks.map((item) => (
               <SocialLink key={item.label} item={item} />
