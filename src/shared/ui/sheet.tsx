@@ -33,7 +33,7 @@ export function SheetContent({className, children, title, ...props}: SheetConten
             {title}
           </Dialog.Title>
           <Dialog.Close
-            className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-full border-0 bg-transparent p-0 text-[#F8F8F8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]"
+            className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-full border-0 bg-transparent p-0 text-[#F8F8F8]"
             aria-label="Close menu"
           >
             <X aria-hidden className="size-[20px]" />

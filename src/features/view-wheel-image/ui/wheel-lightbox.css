@@ -1,0 +1,25 @@
+.wheel-lightbox {
+  font-family: var(--font-body), Inter, sans-serif;
+}
+
+.wheel-lightbox h2,
+.wheel-lightbox p {
+  margin: 0;
+}
+
+.wheel-lightbox a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.wheel-lightbox a:hover,
+.wheel-lightbox a:focus,
+.wheel-lightbox a:focus-visible {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.wheel-lightbox button:focus-visible,
+.wheel-lightbox a:focus-visible {
+  box-shadow: 0 0 0 3px #cd202b;
+}

@@ -30,7 +30,7 @@ export function HomeCustomization() {
           </p>
           <Link
             href={wheelsLink.href}
-            className="mt-[24px] inline-flex min-h-[44px] items-center gap-[8px] text-[15px] font-medium text-[#F8F8F8] no-underline hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]"
+            className="mt-[24px] inline-flex min-h-[44px] items-center gap-[8px] text-[15px] font-medium text-[#F8F8F8] no-underline hover:underline"
           >
             {wheelsLink.label}
             <ArrowUpRight aria-hidden className="size-[16px]" />

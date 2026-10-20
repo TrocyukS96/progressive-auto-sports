@@ -1,0 +1,108 @@
+@media (min-width: 1024px) {
+  .wheel-brand-hero {
+    min-height: calc(108px + 100vw * 809 / 1942);
+  }
+}
+
+@media (min-width: 1680px) {
+  .wheel-brand-hero {
+    min-height: 808px;
+  }
+}
+
+.wheel-brand-page h1,
+.wheel-brand-page h2,
+.wheel-brand-page h3,
+.wheel-brand-page p {
+  margin: 0;
+}
+
+.wheel-brand-page h1,
+.wheel-brand-page h2,
+.wheel-brand-page h3 {
+  font-family: var(--font-display), sans-serif;
+}
+
+.wheel-brand-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wheel-brand-page a:hover,
+.wheel-brand-page a:focus,
+.wheel-brand-page a:focus-visible {
+  text-decoration: none;
+}
+
+.wheel-brand-page .wheel-brand-crumbs {
+  position: relative;
+  z-index: 2;
+}
+
+.wheel-brand-page .wheel-brand-hero h1 {
+  margin-top: 22px;
+}
+
+.wheel-brand-page a.wheel-brand-crumb {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 2px;
+  color: #c2c4c7;
+}
+
+.wheel-brand-page a.wheel-brand-crumb:hover,
+.wheel-brand-page a.wheel-brand-crumb:focus-visible {
+  color: #f8f8f8;
+}
+
+.wheel-brand-page a.wheel-brand-accent,
+.wheel-brand-page a.wheel-brand-accent:hover,
+.wheel-brand-page a.wheel-brand-accent:focus,
+.wheel-brand-page a.wheel-brand-accent:focus-visible {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.wheel-brand-page a.wheel-brand-quiet,
+.wheel-brand-page a.wheel-brand-quiet:hover,
+.wheel-brand-page a.wheel-brand-quiet:focus-visible {
+  color: #111315;
+  text-decoration: none;
+}
+
+.wheel-brand-page button:focus-visible,
+.wheel-brand-page a:focus-visible,
+.wheel-brand-page input:focus-visible {
+  box-shadow: 0 0 0 3px #cd202b;
+}
+
+.wheel-brand-page input[type='search'] {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  color: #111315;
+}
+
+.wheel-brand-page input[type='search']::-webkit-search-cancel-button,
+.wheel-brand-page input[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.wheel-brand-page input::placeholder {
+  color: #55595e;
+  opacity: 1;
+}
+
+#brand-collection {
+  scroll-margin-top: 88px;
+}
+
+@media (min-width: 1024px) {
+  #brand-collection {
+    scroll-margin-top: 100px;
+  }
+}

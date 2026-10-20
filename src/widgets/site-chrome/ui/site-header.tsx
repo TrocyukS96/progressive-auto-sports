@@ -9,32 +9,32 @@ import {Button} from '@/src/shared/ui/button';
 import {Sheet, SheetContent, SheetTrigger} from '@/src/shared/ui/sheet';
 import {siteFontClass} from '../config/fonts';
 import {primaryNav, showroomLink} from '../config/content';
+import {isOverlayHeader} from '../model/is-overlay-header';
 import {SiteLogo} from './site-logo';
 import './site-chrome.css';
 
 const overlayNavLinkClass =
-  'home-nav-link inline-flex min-h-[44px] items-center px-[10px] text-[16px] font-medium text-[#F8F8F8] no-underline [text-shadow:0_1px_8px_rgb(0_0_0/0.55)] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]';
+  'home-nav-link inline-flex min-h-[44px] items-center px-[10px] text-[16px] font-medium text-[#F8F8F8] no-underline [text-shadow:0_1px_8px_rgb(0_0_0/0.55)] hover:text-white';
 
 const barNavLinkClass =
-  'home-nav-link inline-flex min-h-[44px] items-center px-[10px] text-[16px] font-medium text-[#F8F8F8] no-underline hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]';
+  'home-nav-link inline-flex min-h-[44px] items-center px-[10px] text-[16px] font-medium text-[#F8F8F8] no-underline hover:text-white';
 
 const glassButtonClass =
   'border-white/45 bg-white/15 shadow-none backdrop-blur-[14px] hover:border-white hover:bg-[#F8F8F8]';
 
 function isCurrent(pathname: string, href: string) {
   const current = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  if (href === '/wheels/') return current.startsWith('/wheels/');
   return current === href;
 }
 
-type SiteHeaderProps = {
-  variant?: 'overlay' | 'bar';
-};
+const chromeFont = {fontFamily: 'var(--font-body), Inter, sans-serif'} as const;
 
-export function SiteHeader({variant = 'overlay'}: SiteHeaderProps) {
-  const bar = variant === 'bar';
+export function SiteHeader() {
+  const pathname = usePathname();
+  const bar = !isOverlayHeader(pathname);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     if (bar) return;
@@ -46,6 +46,7 @@ export function SiteHeader({variant = 'overlay'}: SiteHeaderProps) {
 
   return (
     <header
+      style={chromeFont}
       className={cn(
         'home-header z-30 text-[#F8F8F8]',
         bar

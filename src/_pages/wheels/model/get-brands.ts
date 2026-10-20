@@ -14,12 +14,34 @@ function decode(value: string) {
     .replace(/&gt;/g, '>');
 }
 
-function localLogo(assetPath: string): string | null {
+/** WordPress 270×180 thumbnails that crop the wordmark. Use the full file instead. */
+const uncroppedLogos: Record<string, {src: string; width: number; height: number}> = {
+  '7b2a671c6acc-savini-logo-270x180.jpg': {
+    src: '/assets/6968578bf044-savini-logo-675x170.jpg',
+    width: 675,
+    height: 170,
+  },
+};
+
+function publicBrandHref(href: string) {
+  if (href.startsWith('/wheel/') && !href.startsWith('/wheels/')) {
+    return `/wheels/${href.slice('/wheel/'.length)}`;
+  }
+  return href;
+}
+
+function localLogo(assetPath: string): {src: string; width: number; height: number} | null {
   const file = assetPath.split('/').pop();
   if (!file) return null;
+
+  const full = uncroppedLogos[file];
+  if (full && existsSync(path.join(process.cwd(), 'public', full.src.replace(/^\//, '')))) {
+    return full;
+  }
+
   const diskPath = path.join(process.cwd(), 'public', 'images', 'brands', file);
   if (!existsSync(diskPath)) return null;
-  return `/images/brands/${file}`;
+  return {src: `/images/brands/${file}`, width: 270, height: 180};
 }
 
 export function getWheelBrands(): WheelBrand[] {
@@ -34,10 +56,13 @@ export function getWheelBrands(): WheelBrand[] {
       const href = match[1];
       if (!href || seen.has(href)) continue;
       seen.add(href);
+      const logo = localLogo(match[3] ?? '');
       brands.push({
         name: decode(match[4] || match[2] || 'Wheel brand'),
-        href,
-        logoSrc: localLogo(match[3] ?? ''),
+        href: publicBrandHref(href),
+        logoSrc: logo?.src ?? null,
+        logoWidth: logo?.width ?? 270,
+        logoHeight: logo?.height ?? 180,
       });
     }
   }

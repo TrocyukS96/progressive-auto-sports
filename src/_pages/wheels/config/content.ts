@@ -1,5 +1,4 @@
 export const wheelsHero = {
-  eyebrow: 'Custom wheels',
   title: 'A different kind of presence.',
   description: 'Explore wheel brands. Find your signature.',
   image: '/images/wheels-hero.png',

@@ -14,7 +14,7 @@ export function SiteLogo({className, imageClassName, priority = false}: SiteLogo
       href="/"
       aria-label="Progressive Autosports, home"
       className={cn(
-        'inline-flex items-center gap-[8px] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[4px] focus-visible:outline-[#F8F8F8] min-[1024px]:gap-[10px]',
+        'inline-flex items-center gap-[8px] no-underline min-[1024px]:gap-[10px]',
         className,
       )}
     >

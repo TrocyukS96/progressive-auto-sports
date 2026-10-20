@@ -10,7 +10,7 @@ type WheelBrandCatalogProps = {
 };
 
 const pageButton =
-  'inline-flex h-[44px] min-w-[44px] items-center justify-center rounded-[8px] border px-[12px] text-[15px] font-medium transition-colors duration-200 motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#111315] disabled:cursor-default';
+  'inline-flex h-[44px] min-w-[44px] items-center justify-center rounded-[8px] border px-[12px] text-[15px] font-medium transition-colors duration-200 motion-reduce:transition-none disabled:cursor-default';
 
 export function WheelBrandCatalog({brands}: WheelBrandCatalogProps) {
   const searchId = useId();
@@ -80,14 +80,14 @@ export function WheelBrandCatalog({brands}: WheelBrandCatalogProps) {
                 placeholder="Search brands"
                 autoComplete="off"
                 onChange={(event) => changeQuery(event.target.value)}
-                className="h-[52px] w-full rounded-full border border-[#DADAD6] bg-white pr-[48px] pl-[44px] text-[16px] text-[#111315] outline-none placeholder:text-[#55595E] focus-visible:border-[#111315] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#111315]"
+                className="h-[52px] w-full rounded-full border border-[#DADAD6] bg-white pr-[48px] pl-[44px] text-[16px] text-[#111315] outline-none placeholder:text-[#55595E]"
               />
               {query.length > 0 ? (
                 <button
                   type="button"
                   aria-label="Clear search"
                   onClick={() => changeQuery('')}
-                  className="absolute top-1/2 right-[4px] inline-flex size-[44px] -translate-y-1/2 items-center justify-center rounded-full border-0 bg-transparent p-0 text-[#111315] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[2px] focus-visible:outline-[#111315]"
+                  className="absolute top-1/2 right-[4px] inline-flex size-[44px] -translate-y-1/2 items-center justify-center rounded-full border-0 bg-transparent p-0 text-[#111315]"
                 >
                   <X aria-hidden className="size-[16px]" />
                 </button>
@@ -114,7 +114,7 @@ export function WheelBrandCatalog({brands}: WheelBrandCatalogProps) {
             <button
               type="button"
               onClick={() => changeQuery('')}
-              className="mt-[16px] inline-flex h-[44px] items-center justify-center rounded-full border border-[#111315] bg-transparent px-[18px] text-[15px] font-medium text-[#111315] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#111315]"
+              className="mt-[16px] inline-flex h-[44px] items-center justify-center rounded-full border border-[#111315] bg-transparent px-[18px] text-[15px] font-medium text-[#111315]"
             >
               Clear search
             </button>
@@ -122,10 +122,7 @@ export function WheelBrandCatalog({brands}: WheelBrandCatalogProps) {
         )}
 
         {count > 1 ? (
-          <nav aria-label="Brand pages" className="mt-[28px] flex flex-wrap items-center justify-between gap-[16px] min-[1024px]:mt-[36px]">
-            <p className="m-0 text-[15px] text-[#55595E]">
-              Page {current} of {count}
-            </p>
+          <nav aria-label="Brand pages" className="mt-[28px] flex flex-wrap items-center justify-end gap-[16px] min-[1024px]:mt-[36px]">
             <div className="flex items-center gap-[8px]">
               <button
                 type="button"

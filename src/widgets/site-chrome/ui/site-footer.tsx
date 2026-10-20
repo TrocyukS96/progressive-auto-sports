@@ -32,7 +32,7 @@ const socialIcons = {
 
 function FooterLink({item}: {item: SiteLink}) {
   const className =
-    'inline-flex min-h-[44px] items-center text-[15px] font-medium leading-none text-[#F8F8F8] no-underline hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]';
+    'inline-flex min-h-[44px] items-center text-[15px] font-medium leading-none text-[#F8F8F8] no-underline hover:text-white';
 
   if (item.external) {
     return (
@@ -59,7 +59,7 @@ function SocialLink({item}: {item: SiteLink}) {
       aria-label={item.label}
       target="_blank"
       rel="noopener noreferrer"
-      className="home-social inline-flex h-[48px] w-[48px] items-center justify-center rounded-full border border-[#F8F8F8] bg-transparent text-[#F8F8F8] no-underline transition-colors duration-[400ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8] motion-reduce:transition-none"
+      className="home-social inline-flex h-[48px] w-[48px] items-center justify-center rounded-full border border-[#F8F8F8] bg-transparent text-[#F8F8F8] no-underline transition-colors duration-[400ms] motion-reduce:transition-none"
     >
       <Icon aria-hidden className="block h-[22px] w-[22px] shrink-0" />
     </a>
@@ -70,7 +70,7 @@ const eyebrow = 'm-0 text-[12px] font-medium uppercase tracking-[0.18em] text-[#
 
 export function SiteFooter() {
   return (
-    <footer className="home-footer bg-[#111315] text-[#F8F8F8]">
+    <footer className="home-footer bg-[#111315] text-[#F8F8F8]" style={{fontFamily: 'var(--font-body), Inter, sans-serif'}}>
       <div className="h-[2px] bg-[#ED343B]" />
       <div className="mx-auto max-w-[1280px] px-[16px] pt-[36px] pb-[28px] min-[768px]:px-[32px] min-[1024px]:pt-[48px] min-[1024px]:pb-[32px]">
         <div className="flex items-center justify-between gap-[16px] border-b border-white/10 pb-[28px]">
@@ -92,14 +92,14 @@ export function SiteFooter() {
               </p>
               <a
                 href={contact.phoneHref}
-                className="grid min-h-[44px] grid-cols-[20px_1fr] items-center gap-[12px] font-medium text-[#F8F8F8] no-underline hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]"
+                className="grid min-h-[44px] grid-cols-[20px_1fr] items-center gap-[12px] font-medium text-[#F8F8F8] no-underline hover:text-white"
               >
                 <Phone aria-hidden className="size-[16px] text-[#C2C4C7]" />
                 <span>{contact.phoneDisplay}</span>
               </a>
               <a
                 href={contact.emailHref}
-                className="grid min-h-[44px] grid-cols-[20px_1fr] items-center gap-[12px] font-medium text-[#F8F8F8] no-underline hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#F8F8F8]"
+                className="grid min-h-[44px] grid-cols-[20px_1fr] items-center gap-[12px] font-medium text-[#F8F8F8] no-underline hover:text-white"
               >
                 <Mail aria-hidden className="size-[16px] text-[#C2C4C7]" />
                 <span>{contact.email}</span>

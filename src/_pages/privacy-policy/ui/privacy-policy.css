@@ -1,0 +1,46 @@
+.privacy-page h1,
+.privacy-page h2,
+.privacy-page p {
+  margin: 0;
+}
+
+.privacy-page a {
+  color: inherit;
+}
+
+.privacy-page a:hover,
+.privacy-page a:focus,
+.privacy-page a:focus-visible {
+  color: inherit;
+}
+
+.privacy-page a.privacy-link {
+  color: #111315;
+  text-decoration: none;
+}
+
+.privacy-page a.privacy-link span {
+  text-decoration: underline;
+  text-decoration-color: #cd202b;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.privacy-page .privacy-contact a.privacy-link,
+.privacy-page .privacy-contact a.privacy-link:hover,
+.privacy-page .privacy-contact a.privacy-link:focus-visible {
+  color: #f8f8f8;
+}
+
+.privacy-page .privacy-contact a.privacy-link span {
+  text-decoration-color: #ed343b;
+}
+
+.privacy-page a.privacy-nav:hover,
+.privacy-page a.privacy-nav:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: #cd202b;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+

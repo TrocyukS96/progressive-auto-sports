@@ -6,10 +6,18 @@ type RouteParams = {slug: string[]};
 
 export const dynamicParams = false;
 
+function legacyBrandSlug(slug: string[]) {
+  if (slug.length !== 2 || slug[0] !== 'wheel') return null;
+  return slug[1];
+}
+
 export function generateStaticParams() {
   return Object.keys(pages)
     .map((route) => ({slug: route.split('/').filter(Boolean)}))
-    .filter((entry) => entry.slug.length > 0 && entry.slug.join('/') !== 'wheels');
+    .filter((entry) => {
+      const path = entry.slug.join('/');
+      return entry.slug.length > 0 && path !== 'wheels' && path !== 'privacy-policy';
+    });
 }
 
 export async function generateMetadata({params}: {params: Promise<RouteParams>}) {
@@ -23,6 +31,8 @@ export default async function ArchivePage({params}: {params: Promise<RouteParams
   const {slug} = await params;
   const route = `/${slug.join('/')}/`;
   if (route === '/wheels/page/2/') redirect('/wheels/');
+  const slugName = legacyBrandSlug(slug);
+  if (slugName) redirect(`/wheels/${slugName}/`);
   if (!(route in pages)) notFound();
   return <Page route={route as keyof typeof pages} />;
 }

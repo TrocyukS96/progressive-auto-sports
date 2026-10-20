@@ -17,9 +17,18 @@
   }
 }
 
+.home-header a.home-nav-link,
+.home-footer a {
+  color: #f8f8f8;
+}
+
+.home-header a.home-nav-link:hover,
+.home-header a.home-nav-link:focus,
+.home-header a.home-nav-link:focus-visible,
 .home-footer a:hover,
 .home-footer a:focus,
 .home-footer a:focus-visible {
+  color: #ffffff;
   text-decoration: none;
 }
 

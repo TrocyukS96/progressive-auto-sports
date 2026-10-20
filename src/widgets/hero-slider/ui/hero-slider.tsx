@@ -143,7 +143,7 @@ function HeroControls({slides}: {slides: HomeSlide[]}) {
                 buttons.current[index] = node;
               }}
               type="button"
-              className="inline-flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[2px] focus-visible:outline-[#F8F8F8]"
+              className="inline-flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0"
               aria-label={`Show slide ${index + 1} of ${slides.length}: ${slide.alt}`}
               aria-pressed={selected}
               aria-current={selected ? 'true' : undefined}

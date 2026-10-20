@@ -4,15 +4,6 @@
   text-decoration: none;
 }
 
-.wheels-page a:focus {
-  outline: none;
-}
-
-.wheels-page a:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
-
 .wheels-page input[type='search'] {
   box-sizing: border-box;
   -webkit-appearance: none;
