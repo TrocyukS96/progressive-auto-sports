@@ -2,9 +2,10 @@ import Link from 'next/link';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import type {ReactNode} from 'react';
 import {cn} from '@/src/shared/lib/cn';
+import './button.css';
 
 const control =
-  'inline-flex h-[44px] min-w-[44px] items-center justify-center rounded-[8px] border px-[12px] text-[15px] font-medium tabular-nums no-underline transition-colors duration-200 motion-reduce:transition-none disabled:cursor-default';
+  'site-control inline-flex h-[44px] min-w-[44px] items-center justify-center rounded-[8px] border px-[12px] text-[15px] font-medium tabular-nums no-underline transition-colors duration-200 motion-reduce:transition-none disabled:cursor-default';
 
 const idle = 'border-[#DADAD6] bg-white text-[#111315] disabled:text-[#55595E]';
 const currentPage = 'border-[#CD202B] bg-[#CD202B] text-white';

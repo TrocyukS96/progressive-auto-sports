@@ -1,0 +1,38 @@
+a.site-button,
+a.site-button:hover,
+a.site-button:focus,
+a.site-button:focus-visible {
+  text-decoration: none;
+}
+
+a.site-button-accent,
+a.site-button-accent:hover,
+a.site-button-accent:focus,
+a.site-button-accent:focus-visible {
+  color: #ffffff;
+}
+
+a.site-button-outline,
+a.site-button-outline:focus,
+a.site-button-outline:focus-visible {
+  color: #f8f8f8;
+}
+
+a.site-button-outline:hover {
+  color: #111315;
+}
+
+a.site-button-ghost,
+a.site-button-ghost:hover,
+a.site-button-ghost:focus,
+a.site-button-ghost:focus-visible {
+  color: #f8f8f8;
+}
+
+a.site-control,
+a.site-control:hover,
+a.site-control:focus,
+a.site-control:focus-visible {
+  color: #111315;
+  text-decoration: none;
+}

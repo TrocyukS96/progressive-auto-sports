@@ -77,23 +77,6 @@
   display: none;
 }
 
-.sales-crumbs {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 8px;
-  margin: 0 0 8px;
-  padding: 0;
-  list-style: none;
-  color: #c2c4c7;
-  font-size: 15px;
-  line-height: 1.4;
-}
-
-.sales-crumb-current {
-  color: #f8f8f8;
-}
-
 .sales-hero-eyebrow,
 .sales-panel-eyebrow {
   margin: 0;
@@ -188,20 +171,6 @@
   flex: none;
 }
 
-.sales-page a.sales-crumb {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  color: #c2c4c7;
-  text-decoration: none;
-}
-
-.sales-page a.sales-crumb:hover,
-.sales-page a.sales-crumb:focus {
-  color: #f8f8f8;
-  text-decoration: none;
-}
-
 .sales-page a.sales-cta,
 .sales-page a.sales-cta:hover,
 .sales-page a.sales-cta:focus,
@@ -267,7 +236,6 @@
   color: #b01c26;
 }
 
-.sales-page a.sales-crumb:focus-visible,
 .sales-page a.sales-email:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px #cd202b;
@@ -359,11 +327,6 @@
 
   .sales-page h2 {
     font-size: 72px;
-  }
-
-  .sales-crumbs {
-    margin-bottom: 22px;
-    font-size: 16px;
   }
 
   .sales-panel-grid {

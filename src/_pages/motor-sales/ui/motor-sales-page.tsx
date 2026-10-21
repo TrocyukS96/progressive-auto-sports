@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
 import {Button} from '@/src/shared/ui/button';
 import {siteFontClass} from '@/src/widgets/site-chrome';
@@ -39,19 +38,6 @@ export function MotorSalesPage() {
         <section className="sales-hero" aria-labelledby="sales-hero-title">
           <div className="sales-hero-copy">
             <div className="sales-shell">
-              <nav aria-label="Breadcrumb">
-                <ol className="sales-crumbs">
-                  <li>
-                    <Link href="/" className="sales-crumb">
-                      {motorSalesCopy.breadcrumbHome}
-                    </Link>
-                  </li>
-                  <li aria-hidden="true">/</li>
-                  <li aria-current="page" className="sales-crumb-current">
-                    {motorSalesCopy.breadcrumbCurrent}
-                  </li>
-                </ol>
-              </nav>
               <div className="sales-hero-lead">
                 <p className="sales-hero-eyebrow">{hero.eyebrow}</p>
                 <HeadingLines as="h1" id="sales-hero-title" lines={hero.headingLines} />

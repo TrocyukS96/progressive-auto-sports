@@ -2,18 +2,19 @@ import {Slot} from '@radix-ui/react-slot';
 import {cva, type VariantProps} from 'class-variance-authority';
 import type {ButtonHTMLAttributes} from 'react';
 import {cn} from '@/src/shared/lib/cn';
+import './button.css';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-full border text-[14px] font-medium leading-none no-underline transition-colors duration-[400ms] cursor-pointer motion-reduce:transition-none disabled:pointer-events-none',
+  'site-button inline-flex items-center justify-center gap-[8px] whitespace-nowrap rounded-full border text-[14px] font-medium leading-none no-underline transition-colors duration-[400ms] cursor-pointer motion-reduce:transition-none disabled:pointer-events-none',
   {
     variants: {
       variant: {
         outline:
-          'border-[#F8F8F8] bg-transparent text-[#F8F8F8] hover:bg-[#F8F8F8] hover:text-[#111315]',
+          'site-button-outline border-[#F8F8F8] bg-transparent text-[#F8F8F8] hover:bg-[#F8F8F8] hover:text-[#111315]',
         accent:
-          'border-transparent bg-[#CD202B] text-[#FFFFFF] hover:bg-[#B01C26]',
+          'site-button-accent border-transparent bg-[#CD202B] text-[#FFFFFF] hover:bg-[#B01C26]',
         ghost:
-          'border-transparent bg-transparent text-[#F8F8F8] hover:bg-white/10',
+          'site-button-ghost border-transparent bg-transparent text-[#F8F8F8] hover:bg-white/10',
       },
       size: {
         default: 'h-[44px] px-[18px]',

@@ -31,7 +31,7 @@ function HeadingLines({
 }
 
 export function AboutPage() {
-  const {hero, story, approach, brands, cta} = aboutCopy;
+  const {story, approach, brands, cta} = aboutCopy;
 
   return (
     <div className={`${siteFontClass} about-page flex-1`}>
@@ -46,39 +46,32 @@ export function AboutPage() {
             quality={90}
             className="about-hero-image"
           />
-        </figure>
-
-        <section className="about-intro" aria-labelledby="about-title">
-          <div className="about-shell about-intro-inner">
-            <div className="about-intro-grid">
-              <div>
-                <p className="about-eyebrow">{hero.eyebrow}</p>
-                <HeadingLines as="h1" id="about-title" lines={hero.headingLines} />
-              </div>
-              <div className="about-intro-aside">
-                <p className="about-intro-copy">
-                  {hero.descriptionLines.map((line) => (
-                    <span key={line}>{line}</span>
-                  ))}
+          <div className="about-plaque-wrap">
+            <div className="about-shell">
+              <figcaption className="about-plaque">
+                <p className="about-plaque-place">{aboutCopy.plaque.place}</p>
+                <p className="about-plaque-title">
+                  {aboutCopy.plaque.lines.map((line, index) => {
+                    const accent = index === aboutCopy.plaque.lines.length - 1 && line.endsWith('.');
+                    const text = accent ? line.slice(0, -1) : line;
+                    return (
+                      <span key={line} className="about-plaque-title-line">
+                        {text}
+                        {accent ? <span className="about-dot">.</span> : null}
+                      </span>
+                    );
+                  })}
                 </p>
-                <span className="about-rule" aria-hidden="true" />
-                <p className="about-location">{hero.location}</p>
-              </div>
+              </figcaption>
             </div>
           </div>
-        </section>
-
-        <div className="about-caption-wrap">
-          <div className="about-shell">
-            <p className="about-caption">{aboutCopy.caption}</p>
-          </div>
-        </div>
+        </figure>
 
         <section className="about-story" aria-labelledby="about-story-title">
           <div className="about-shell about-story-grid">
             <div>
               <p className="about-kicker">{story.eyebrow}</p>
-              <HeadingLines as="h2" id="about-story-title" lines={story.headingLines} />
+              <HeadingLines as="h1" id="about-story-title" lines={story.headingLines} />
               <p className="about-year">{story.year}</p>
               <span className="about-year-rule" aria-hidden="true" />
               <p className="about-year-caption">{story.yearCaption}</p>

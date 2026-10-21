@@ -122,7 +122,7 @@ export function WheelImageLightbox({items, activeId, brandName, contactEmail, on
                 </button>
               ) : null}
               {item ? (
-                <a className="inline-flex h-[44px] items-center justify-center gap-[8px] rounded-full border border-transparent bg-[#CD202B] px-[16px] text-[14px] font-medium text-white no-underline" href={mailtoHref(contactEmail, brandName, item)}>
+                <a className="site-button site-button-accent inline-flex h-[44px] items-center justify-center gap-[8px] rounded-full border border-transparent bg-[#CD202B] px-[16px] text-[14px] font-medium text-white no-underline" href={mailtoHref(contactEmail, brandName, item)}>
                   {named ? 'Ask about this design' : 'Ask about fitment'}
                   <ArrowUpRight aria-hidden className="size-[16px]" />
                 </a>

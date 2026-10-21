@@ -1,11 +1,8 @@
 export const aboutCopy = {
-  hero: {
-    eyebrow: 'ABOUT PROGRESSIVE AUTOSPORTS',
-    headingLines: ['Driven by detail.', 'Since 1996.'] as const,
-    descriptionLines: ['Individual style. Original brands.', 'A personal approach to every car.'] as const,
-    location: 'HOUSTON, TEXAS',
+  plaque: {
+    place: 'Houston, Texas',
+    lines: ['One car', 'Full attention.'] as const,
   },
-  caption: 'HOUSTON, TEXAS / PROGRESSIVE AUTOSPORTS',
   story: {
     eyebrow: 'OUR STORY',
     headingLines: ['Built on passion.', 'Defined by quality.'] as const,

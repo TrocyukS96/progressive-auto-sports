@@ -24,11 +24,6 @@
   padding-bottom: 0.38em;
 }
 
-.about-page h1 {
-  color: #f8f8f8;
-  font-size: clamp(28px, 7.4vw, 40px);
-}
-
 .about-page ul,
 .about-page ol {
   margin: 0;
@@ -67,18 +62,55 @@
   object-position: center center;
 }
 
-.about-intro {
-  border-top: 3px solid #ed343b;
-  background: #111315;
+.about-plaque-wrap {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 28px;
+  left: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.about-plaque {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 26px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  background: rgba(17, 19, 21, 0.78);
   color: #f8f8f8;
+  pointer-events: auto;
+  backdrop-filter: blur(18px);
 }
 
-.about-intro-inner {
-  padding-top: 28px;
-  padding-bottom: 40px;
+.about-plaque-place {
+  margin: 0;
+  color: #c2c4c7;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
-.about-intro-grid,
+.about-plaque-title {
+  max-width: 100%;
+  margin: 14px 0 0;
+  color: #f8f8f8;
+  font-family: var(--font-display), sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.about-plaque-title-line {
+  display: block;
+}
+
 .about-story-grid,
 .about-approach-grid,
 .about-cta-grid {
@@ -87,7 +119,6 @@
   gap: 28px;
 }
 
-.about-intro-grid > *,
 .about-story-grid > *,
 .about-approach-grid > *,
 .about-cta-grid > * {
@@ -112,25 +143,6 @@
   color: #55595e;
 }
 
-.about-page .about-intro h1 {
-  margin-top: 10px;
-}
-
-.about-intro-aside {
-  max-width: 320px;
-}
-
-.about-intro-copy {
-  color: #f8f8f8;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.about-intro-copy span {
-  display: block;
-}
-
-.about-rule,
 .about-year-rule {
   display: block;
   width: 36px;
@@ -139,9 +151,7 @@
   background: #c2c4c7;
 }
 
-.about-location,
-.about-year-caption,
-.about-caption {
+.about-year-caption {
   margin: 0;
   font-size: 12px;
   font-weight: 500;
@@ -150,24 +160,10 @@
   text-transform: uppercase;
 }
 
-.about-location {
-  color: #c2c4c7;
-}
-
 .about-wheel img {
   display: block;
   width: 100%;
   height: auto;
-}
-
-.about-caption-wrap {
-  padding-top: 14px;
-  padding-bottom: 4px;
-}
-
-.about-caption {
-  color: #55595e;
-  font-size: 11px;
 }
 
 .about-story {
@@ -175,7 +171,7 @@
   padding-bottom: 8px;
 }
 
-.about-page .about-story h2 {
+.about-page .about-story h1 {
   margin-top: 12px;
   color: #111315;
   font-size: 34px;
@@ -345,20 +341,25 @@
 }
 
 @media (min-width: 768px) {
-  .about-page h1 {
-    font-size: 48px;
-  }
-
   .about-shell {
     padding-inline: 32px;
   }
 
-  .about-intro-inner {
-    padding-top: 36px;
-    padding-bottom: 52px;
+  .about-plaque {
+    padding: 34px 40px;
+    border-radius: 22px;
   }
 
-  .about-page .about-story h2 {
+  .about-plaque-place {
+    font-size: 13px;
+  }
+
+  .about-plaque-title {
+    margin-top: 18px;
+    font-size: 52px;
+  }
+
+  .about-page .about-story h1 {
     font-size: 40px;
   }
 
@@ -381,16 +382,6 @@
 }
 
 @media (min-width: 900px) {
-  .about-intro-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-    align-items: end;
-    column-gap: 48px;
-  }
-
-  .about-page h1 {
-    font-size: 54px;
-  }
-
   .about-story-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
@@ -403,7 +394,7 @@
     column-gap: 48px;
   }
 
-  .about-page .about-story h2 {
+  .about-page .about-story h1 {
     font-size: 44px;
   }
 
@@ -427,21 +418,26 @@
   }
 }
 
+@media (min-width: 960px) {
+  .about-plaque-title {
+    font-size: 60px;
+  }
+}
+
 @media (min-width: 1024px) {
   .about-shell {
     padding-inline: 48px;
   }
 
-  .about-intro-inner {
-    padding-top: 44px;
-    padding-bottom: 64px;
+  .about-plaque-wrap {
+    bottom: 40px;
   }
 
-  .about-intro-copy {
-    font-size: 18px;
+  .about-plaque {
+    padding: 40px 48px;
   }
 
-  .about-page .about-story h2 {
+  .about-page .about-story h1 {
     font-size: 46px;
   }
 
@@ -463,10 +459,6 @@
 }
 
 @media (min-width: 1200px) {
-  .about-page h1 {
-    font-size: 60px;
-  }
-
   .about-brand-list {
     justify-content: space-between;
     gap: 12px 28px;

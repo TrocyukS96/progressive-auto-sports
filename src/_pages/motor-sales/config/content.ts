@@ -1,6 +1,4 @@
 export const motorSalesCopy = {
-  breadcrumbHome: 'Home',
-  breadcrumbCurrent: 'Motor Sales',
   hero: {
     eyebrow: 'Progressive Motorsports',
     headingLines: ['Extraordinary cars.', 'Individual character.'] as const,
