@@ -1,0 +1,481 @@
+.about-page {
+  background: #f4f3ef;
+  color: #111315;
+  font-family: var(--font-body), Inter, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.about-page h1,
+.about-page h2,
+.about-page p {
+  margin: 0;
+}
+
+.about-page h1,
+.about-page h2 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.about-line:not(:last-child) {
+  padding-bottom: 0.38em;
+}
+
+.about-page h1 {
+  color: #f8f8f8;
+  font-size: clamp(28px, 7.4vw, 40px);
+}
+
+.about-page ul,
+.about-page ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-line {
+  display: block;
+}
+
+.about-dot {
+  color: #ed343b;
+}
+
+.about-shell {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.about-hero {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  background: #111315;
+  color: #f8f8f8;
+}
+
+.about-hero-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.about-intro {
+  border-top: 3px solid #ed343b;
+  background: #111315;
+  color: #f8f8f8;
+}
+
+.about-intro-inner {
+  padding-top: 28px;
+  padding-bottom: 40px;
+}
+
+.about-intro-grid,
+.about-story-grid,
+.about-approach-grid,
+.about-cta-grid {
+  display: grid;
+  min-width: 0;
+  gap: 28px;
+}
+
+.about-intro-grid > *,
+.about-story-grid > *,
+.about-approach-grid > *,
+.about-cta-grid > * {
+  min-width: 0;
+}
+
+.about-eyebrow,
+.about-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.about-eyebrow {
+  color: #c2c4c7;
+}
+
+.about-kicker {
+  color: #55595e;
+}
+
+.about-page .about-intro h1 {
+  margin-top: 10px;
+}
+
+.about-intro-aside {
+  max-width: 320px;
+}
+
+.about-intro-copy {
+  color: #f8f8f8;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.about-intro-copy span {
+  display: block;
+}
+
+.about-rule,
+.about-year-rule {
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin: 16px 0 12px;
+  background: #c2c4c7;
+}
+
+.about-location,
+.about-year-caption,
+.about-caption {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.about-location {
+  color: #c2c4c7;
+}
+
+.about-wheel img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-caption-wrap {
+  padding-top: 14px;
+  padding-bottom: 4px;
+}
+
+.about-caption {
+  color: #55595e;
+  font-size: 11px;
+}
+
+.about-story {
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.about-page .about-story h2 {
+  margin-top: 12px;
+  color: #111315;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.about-year {
+  margin-top: 28px;
+  color: #7a7e83;
+  font-family: var(--font-display), sans-serif;
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-year-rule {
+  margin-top: 14px;
+  background: #b7b8bb;
+}
+
+.about-year-caption {
+  color: #55595e;
+}
+
+.about-story-copy {
+  display: grid;
+  gap: 24px;
+  max-width: 560px;
+}
+
+.about-story-copy p {
+  color: #111315;
+  font-size: 16px;
+  line-height: 1.62;
+  hyphens: manual;
+}
+
+.about-divider {
+  height: 1px;
+  margin: 36px 0 0;
+  border: 0;
+  background: #dadad6;
+}
+
+.about-approach {
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.about-wheel {
+  margin: 0;
+}
+
+.about-page .about-approach h2 {
+  margin-top: 12px;
+  color: #111315;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.about-principles {
+  margin-top: 8px;
+}
+
+.about-principle {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px 12px;
+  align-items: start;
+  padding: 18px 0;
+  border-top: 1px solid #dadad6;
+}
+
+.about-principle:last-child {
+  border-bottom: 1px solid #dadad6;
+}
+
+.about-principle-number {
+  color: #ed343b;
+  font-family: var(--font-display), sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-principle-title {
+  color: #111315;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.about-principle-text {
+  margin-top: 4px;
+  color: #55595e;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.about-brands {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.about-brands-panel {
+  border-top: 1px solid #dadad6;
+  border-bottom: 1px solid #dadad6;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.about-brand-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 16px;
+}
+
+.about-brand-list li {
+  color: #111315;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.about-cta {
+  background: #111315;
+  color: #f8f8f8;
+}
+
+.about-cta-inner {
+  padding-top: 40px;
+  padding-bottom: 44px;
+}
+
+.about-page .about-cta h2 {
+  margin-top: 12px;
+  color: #f8f8f8;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.about-cta-copy {
+  margin: 0;
+  color: #f8f8f8;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.about-cta-action {
+  margin-top: 18px;
+}
+
+.about-page a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #cd202b;
+}
+
+.about-page a.about-cta-button:focus-visible {
+  box-shadow: 0 0 0 2px #111315, 0 0 0 5px #f8f8f8;
+}
+
+@media (min-width: 768px) {
+  .about-page h1 {
+    font-size: 48px;
+  }
+
+  .about-shell {
+    padding-inline: 32px;
+  }
+
+  .about-intro-inner {
+    padding-top: 36px;
+    padding-bottom: 52px;
+  }
+
+  .about-page .about-story h2 {
+    font-size: 40px;
+  }
+
+  .about-year {
+    font-size: 76px;
+  }
+
+  .about-story {
+    padding-top: 40px;
+  }
+
+  .about-page .about-approach h2 {
+    font-size: 34px;
+  }
+
+  .about-cta-inner {
+    padding-top: 48px;
+    padding-bottom: 52px;
+  }
+}
+
+@media (min-width: 900px) {
+  .about-intro-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    align-items: end;
+    column-gap: 48px;
+  }
+
+  .about-page h1 {
+    font-size: 54px;
+  }
+
+  .about-story-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: 40px;
+  }
+
+  .about-approach-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    column-gap: 48px;
+  }
+
+  .about-page .about-story h2 {
+    font-size: 44px;
+  }
+
+  .about-page .about-approach h2 {
+    font-size: 36px;
+  }
+
+  .about-brand-list {
+    justify-content: space-between;
+    gap: 12px 20px;
+  }
+
+  .about-cta-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+    align-items: center;
+    column-gap: 40px;
+  }
+
+  .about-cta-action {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-shell {
+    padding-inline: 48px;
+  }
+
+  .about-intro-inner {
+    padding-top: 44px;
+    padding-bottom: 64px;
+  }
+
+  .about-intro-copy {
+    font-size: 18px;
+  }
+
+  .about-page .about-story h2 {
+    font-size: 46px;
+  }
+
+  .about-year {
+    font-size: 84px;
+  }
+
+  .about-page .about-cta h2 {
+    font-size: 46px;
+  }
+
+  .about-story {
+    padding-top: 52px;
+  }
+
+  .about-approach {
+    padding-top: 36px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .about-page h1 {
+    font-size: 60px;
+  }
+
+  .about-brand-list {
+    justify-content: space-between;
+    gap: 12px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page a,
+  .about-page button {
+    transition: none;
+  }
+}

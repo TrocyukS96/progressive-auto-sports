@@ -8,7 +8,7 @@ import {cn} from '@/src/shared/lib/cn';
 import {Button} from '@/src/shared/ui/button';
 import {Sheet, SheetContent, SheetTrigger} from '@/src/shared/ui/sheet';
 import {siteFontClass} from '../config/fonts';
-import {primaryNav, showroomLink} from '../config/content';
+import {onlineStoreLink, primaryNav} from '../config/content';
 import {isOverlayHeader} from '../model/is-overlay-header';
 import {SiteLogo} from './site-logo';
 import './site-chrome.css';
@@ -89,10 +89,15 @@ export function SiteHeader() {
                 : `home-desktop-cta h-[36px] px-[16px] text-[15px] ${glassButtonClass}`
             }
           >
-            <Link href={showroomLink.href}>
-              {showroomLink.label}
+            <a
+              href={onlineStoreLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${onlineStoreLink.label}, opens in a new tab`}
+            >
+              {onlineStoreLink.label}
               <ArrowUpRight aria-hidden className="size-[16px]" />
-            </Link>
+            </a>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -124,14 +129,17 @@ export function SiteHeader() {
                     {item.label}
                   </Link>
                 ))}
-                <Link
-                  href={showroomLink.href}
+                <a
+                  href={onlineStoreLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${onlineStoreLink.label}, opens in a new tab`}
                   className="mt-[12px] inline-flex min-h-[44px] items-center gap-[8px] text-[18px] font-medium text-[#F8F8F8] no-underline"
                   onClick={() => setOpen(false)}
                 >
-                  {showroomLink.label}
+                  {onlineStoreLink.label}
                   <ArrowUpRight aria-hidden className="size-[16px]" />
-                </Link>
+                </a>
               </nav>
             </SheetContent>
           </Sheet>

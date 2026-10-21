@@ -20,6 +20,9 @@ export function generateStaticParams() {
         entry.slug.length > 0 &&
         path !== 'wheels' &&
         path !== 'privacy-policy' &&
+        path !== 'contact' &&
+        path !== 'about' &&
+        path !== 'motor-sales-2' &&
         path !== 'galleries' &&
         !path.startsWith('galleries/') &&
         !(entry.slug[0] === 'gallery' && entry.slug.length === 2)

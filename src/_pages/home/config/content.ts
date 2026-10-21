@@ -19,7 +19,7 @@ export type CollectionCard = {
   objectPosition: string;
 };
 
-export const inventoryLink: HomeLink = {href: '/motor-sales-2/', label: 'Explore inventory'};
+export const inventoryLink: HomeLink = {href: '/sales/', label: 'Explore inventory'};
 export const wheelsLink: HomeLink = {href: '/wheels/', label: 'Explore wheels'};
 
 export const heroSlides: HomeSlide[] = [
