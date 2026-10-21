@@ -1,9 +1,10 @@
 'use client';
 
-import {ChevronLeft, ChevronRight, Search, X} from 'lucide-react';
+import {Search, X} from 'lucide-react';
 import {useEffect, useId, useRef, useState} from 'react';
 import {WheelDesignCard, type WheelCatalogItem, type WheelCategory} from '@/src/entities/wheel-design';
 import {WheelImageLightbox} from '@/src/features/view-wheel-image';
+import {CatalogPagination} from '@/src/shared/ui/catalog-pagination';
 import {DESIGNS_PER_PAGE, clampPage, filterCatalogItems, pageCount, paginate, paginationItems, resultNoun, showingLabel} from '../model/catalog';
 
 type WheelDesignCatalogProps = {
@@ -14,9 +15,6 @@ type WheelDesignCatalogProps = {
   searchable: boolean;
   contactEmail: string;
 };
-
-const pageButton =
-  'inline-flex h-[44px] min-w-[44px] items-center justify-center rounded-[8px] border px-[12px] text-[15px] font-medium tabular-nums transition-colors duration-200 motion-reduce:transition-none disabled:cursor-default';
 
 export function WheelDesignCatalog({brandName, categories, showFilters, items, searchable, contactEmail}: WheelDesignCatalogProps) {
   const searchId = useId();
@@ -152,34 +150,7 @@ export function WheelDesignCatalog({brandName, categories, showFilters, items, s
         {filtered.length > 0 ? (
           <div className="mt-[24px] flex flex-col gap-[16px] min-[768px]:mt-[28px] min-[768px]:flex-row min-[768px]:items-center min-[768px]:justify-between">
             <p className="m-0 text-[14px] text-[#55595E] tabular-nums">{showingLabel(visible.length, filtered.length, noun)}</p>
-            {count > 1 ? (
-              <nav aria-label="Design pages" className="flex flex-wrap items-center gap-[8px]">
-                <button type="button" className={`${pageButton} border-[#DADAD6] bg-white text-[#111315] disabled:text-[#55595E]`} aria-label="Previous page" disabled={current <= 1} onClick={() => changePage(current - 1)}>
-                  <ChevronLeft aria-hidden className="size-[18px]" />
-                </button>
-                {pages.map((entry, index) =>
-                  entry === 'gap' ? (
-                    <span key={`gap-${index}`} className="px-[4px] text-[15px] text-[#55595E]" aria-hidden>
-                      …
-                    </span>
-                  ) : (
-                    <button
-                      key={entry}
-                      type="button"
-                      className={entry === current ? `${pageButton} border-[#CD202B] bg-[#CD202B] text-white` : `${pageButton} border-[#DADAD6] bg-white text-[#111315]`}
-                      aria-label={`Page ${entry}`}
-                      aria-current={entry === current ? 'page' : undefined}
-                      onClick={() => changePage(entry)}
-                    >
-                      {entry}
-                    </button>
-                  ),
-                )}
-                <button type="button" className={`${pageButton} border-[#DADAD6] bg-white text-[#111315] disabled:text-[#55595E]`} aria-label="Next page" disabled={current >= count} onClick={() => changePage(current + 1)}>
-                  <ChevronRight aria-hidden className="size-[18px]" />
-                </button>
-              </nav>
-            ) : null}
+            <CatalogPagination label="Design pages" current={current} count={count} items={pages} onSelect={changePage} />
           </div>
         ) : null}
       </div>

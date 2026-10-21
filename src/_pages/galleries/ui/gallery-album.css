@@ -1,0 +1,141 @@
+.gallery-album-page h1,
+.gallery-album-page h2,
+.gallery-album-page h3,
+.gallery-album-page p {
+  margin: 0;
+}
+
+.gallery-album-page h1,
+.gallery-album-page h2,
+.gallery-album-page h3 {
+  font-family: var(--font-display), sans-serif;
+}
+
+.gallery-album-page a,
+.gallery-album-page a:hover,
+.gallery-album-page a:focus,
+.gallery-album-page a:focus-visible {
+  text-decoration: none;
+}
+
+.gallery-album-page a.album-crumb,
+.gallery-album-page a.album-crumb:focus-visible {
+  color: #c2c4c7;
+}
+
+.gallery-album-page a.album-crumb:hover,
+.gallery-album-page a.album-crumb:focus-visible {
+  color: #f8f8f8;
+}
+
+.gallery-album-page a.album-outline,
+.gallery-album-page a.album-outline:focus-visible {
+  color: #f8f8f8;
+}
+
+.gallery-album-page a.album-outline:hover {
+  color: #111315;
+}
+
+.gallery-album-page a.album-quiet,
+.gallery-album-page a.album-quiet:hover,
+.gallery-album-page a.album-quiet:focus-visible {
+  color: #111315;
+}
+
+.gallery-album-page a.album-accent,
+.gallery-album-page a.album-accent:hover,
+.gallery-album-page a.album-accent:focus-visible {
+  color: #ffffff;
+}
+
+.gallery-album-page a:focus-visible,
+.gallery-album-page button:focus-visible,
+.gallery-album-page summary:focus-visible,
+.album-lightbox :focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #cd202b;
+}
+
+.album-lightbox:focus,
+.album-lightbox:focus-visible {
+  box-shadow: none;
+}
+
+.gallery-album-page summary {
+  list-style: none;
+}
+
+.gallery-album-page summary::-webkit-details-marker {
+  display: none;
+}
+
+.album-filmstrip {
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.album-filmstrip::-webkit-scrollbar {
+  display: none;
+}
+
+.album-mosaic,
+.album-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.album-mosaic > *,
+.album-grid > * {
+  min-width: 0;
+  aspect-ratio: 21 / 9;
+}
+
+@media (min-width: 768px) {
+  .album-mosaic,
+  .album-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .album-mosaic {
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+  }
+
+  .album-mosaic > * {
+    grid-column: span var(--tile-span);
+    aspect-ratio: var(--tile-aspect);
+  }
+
+  .album-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.album-photo-in {
+  animation: album-photo-in 400ms ease;
+}
+
+@keyframes album-photo-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .album-photo-in {
+    animation: none;
+  }
+
+  .gallery-album-page a,
+  .gallery-album-page button,
+  .gallery-album-page summary {
+    transition: none;
+  }
+}

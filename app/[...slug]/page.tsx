@@ -16,7 +16,14 @@ export function generateStaticParams() {
     .map((route) => ({slug: route.split('/').filter(Boolean)}))
     .filter((entry) => {
       const path = entry.slug.join('/');
-      return entry.slug.length > 0 && path !== 'wheels' && path !== 'privacy-policy';
+      return (
+        entry.slug.length > 0 &&
+        path !== 'wheels' &&
+        path !== 'privacy-policy' &&
+        path !== 'galleries' &&
+        !path.startsWith('galleries/') &&
+        !(entry.slug[0] === 'gallery' && entry.slug.length === 2)
+      );
     });
 }
 

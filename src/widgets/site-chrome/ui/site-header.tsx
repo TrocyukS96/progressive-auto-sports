@@ -25,6 +25,7 @@ const glassButtonClass =
 function isCurrent(pathname: string, href: string) {
   const current = pathname.endsWith('/') ? pathname : `${pathname}/`;
   if (href === '/wheels/') return current.startsWith('/wheels/');
+  if (href === '/galleries/') return current.startsWith('/galleries/') || current.startsWith('/gallery/');
   return current === href;
 }
 

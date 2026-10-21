@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node scripts/start-standalone.mjs",
-    "test": "node --import ./scripts/register-test-alias.mjs --experimental-strip-types --test src/_pages/wheel-brand/config/wheel-hero-map.test.ts src/_pages/wheel-brand/model/adapt-brand-data.test.ts src/widgets/wheel-design-catalog/model/catalog.test.ts"
+    "test": "node --import ./scripts/register-test-alias.mjs --experimental-strip-types --test src/_pages/wheel-brand/config/wheel-hero-map.test.ts src/_pages/wheel-brand/model/adapt-brand-data.test.ts src/widgets/wheel-design-catalog/model/catalog.test.ts src/_pages/galleries/model/catalog.test.ts src/_pages/galleries/model/album.test.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.3.1",

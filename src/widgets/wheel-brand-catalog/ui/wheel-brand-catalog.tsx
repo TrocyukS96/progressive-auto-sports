@@ -1,16 +1,14 @@
 'use client';
 
-import {ChevronLeft, ChevronRight, Search, X} from 'lucide-react';
+import {Search, X} from 'lucide-react';
 import {useEffect, useId, useRef, useState} from 'react';
 import {WheelBrandCard, type WheelBrand} from '@/src/entities/wheel-brand';
+import {CatalogPagination} from '@/src/shared/ui/catalog-pagination';
 import {BRANDS_PER_PAGE, clampPage, filterBrands, pageCount, paginate} from '../model/catalog';
 
 type WheelBrandCatalogProps = {
   brands: WheelBrand[];
 };
-
-const pageButton =
-  'inline-flex h-[44px] min-w-[44px] items-center justify-center rounded-[8px] border px-[12px] text-[15px] font-medium transition-colors duration-200 motion-reduce:transition-none disabled:cursor-default';
 
 export function WheelBrandCatalog({brands}: WheelBrandCatalogProps) {
   const searchId = useId();
@@ -121,49 +119,14 @@ export function WheelBrandCatalog({brands}: WheelBrandCatalogProps) {
           </div>
         )}
 
-        {count > 1 ? (
-          <nav aria-label="Brand pages" className="mt-[28px] flex flex-wrap items-center justify-end gap-[16px] min-[1024px]:mt-[36px]">
-            <div className="flex items-center gap-[8px]">
-              <button
-                type="button"
-                className={`${pageButton} border-[#DADAD6] bg-white text-[#111315] disabled:text-[#55595E]`}
-                aria-label="Previous page"
-                disabled={current <= 1}
-                onClick={() => changePage(current - 1)}
-              >
-                <ChevronLeft aria-hidden className="size-[18px]" />
-              </button>
-              {Array.from({length: count}, (_, index) => index + 1).map((number) => {
-                const active = number === current;
-                return (
-                  <button
-                    key={number}
-                    type="button"
-                    className={
-                      active
-                        ? `${pageButton} border-[#CD202B] bg-[#CD202B] text-white`
-                        : `${pageButton} border-[#DADAD6] bg-white text-[#111315]`
-                    }
-                    aria-label={`Page ${number}`}
-                    aria-current={active ? 'page' : undefined}
-                    onClick={() => changePage(number)}
-                  >
-                    {number}
-                  </button>
-                );
-              })}
-              <button
-                type="button"
-                className={`${pageButton} border-[#DADAD6] bg-white text-[#111315] disabled:text-[#55595E]`}
-                aria-label="Next page"
-                disabled={current >= count}
-                onClick={() => changePage(current + 1)}
-              >
-                <ChevronRight aria-hidden className="size-[18px]" />
-              </button>
-            </div>
-          </nav>
-        ) : null}
+        <CatalogPagination
+          label="Brand pages"
+          current={current}
+          count={count}
+          items={Array.from({length: count}, (_, index) => index + 1)}
+          onSelect={changePage}
+          className="mt-[28px] justify-end min-[1024px]:mt-[36px]"
+        />
       </div>
     </section>
   );
