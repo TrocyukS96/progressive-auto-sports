@@ -2,6 +2,11 @@ export const wheelsHero = {
   title: 'A different kind of presence.',
   description: 'Explore wheel brands. Find your signature.',
   image: '/images/wheels-hero.png',
+  imageWidth: 1942,
+  imageHeight: 809,
+  mobileImage: '/images/wheels/hero-mobile.jpg',
+  mobileImageWidth: 576,
+  mobileImageHeight: 1024,
 };
 
 export const wheelsFitment = {

@@ -13,7 +13,11 @@ export function HomeCollection() {
           {collectionCards.map((card) => (
             <li key={card.eyebrow}>
               <article>
-                <div className="relative aspect-[19/10] overflow-hidden rounded-[8px] bg-[#E7E4DE]">
+                <div
+                  className={`relative overflow-hidden rounded-[8px] bg-[#E7E4DE] ${
+                    card.ratio === 'photo' ? 'aspect-[3/2] min-[768px]:aspect-[19/10]' : 'aspect-[39/20]'
+                  }`}
+                >
                   <Image
                     src={card.src}
                     alt={card.alt}

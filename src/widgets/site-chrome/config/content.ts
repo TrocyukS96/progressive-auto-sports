@@ -20,6 +20,10 @@ export const onlineStoreLink: SiteLink = {
 };
 
 const addressLines = ['14037 Stuebner Airline Rd', 'Houston, TX 77069'];
+const addressQuery = encodeURIComponent(addressLines.join(', '));
+const showroomPin = '29.989045,-95.499824';
+// Centered west of the pin so the marker stays in the open part of the card.
+const mapPreviewCenter = '29.989045,-95.506824';
 
 export const contact = {
   addressLines,
@@ -28,7 +32,8 @@ export const contact = {
   phoneHref: 'tel:281-893-1134',
   email: 'sales@progressiveautosports.com',
   emailHref: 'mailto:sales@progressiveautosports.com',
-  mapsSearchHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLines.join(', '))}`,
+  mapsSearchHref: `https://www.google.com/maps/search/?api=1&query=${addressQuery}`,
+  mapsEmbedHref: `https://maps.google.com/maps?ll=${mapPreviewCenter}&q=${showroomPin}&hl=en&z=15&output=embed`,
 };
 
 export const socialLinks: SiteLink[] = [

@@ -36,15 +36,17 @@ export function ContactPage() {
         <div className="contact-body">
           <div className="contact-shell contact-body-inner">
             <div className="contact-columns">
-              <section aria-labelledby="contact-form-title" className="min-w-0">
-                <ContactForm email={contact.email} emailHref={contact.emailHref} />
+              <section aria-labelledby="contact-form-title" className="contact-form-column min-w-0">
+                <ContactForm email={contact.email} />
               </section>
 
               <section aria-labelledby="contact-details-title" className="contact-card">
-                <p className="contact-eyebrow">{contactCopy.detailsEyebrow}</p>
-                <h2 id="contact-details-title">
-                  {contactCopy.detailsHeading}<span className="contact-dot">.</span>
-                </h2>
+                <div className="contact-card-intro">
+                  <p className="contact-eyebrow">{contactCopy.detailsEyebrow}</p>
+                  <h2 id="contact-details-title">
+                    {contactCopy.detailsHeading}<span className="contact-dot">.</span>
+                  </h2>
+                </div>
                 <ul className="contact-details">
                   <li className="contact-detail">
                     <span className="contact-icon">
@@ -86,15 +88,17 @@ export function ContactPage() {
                     </div>
                   </li>
                 </ul>
-                <div className="contact-directions-wrap">
-                  <Button variant="outline" asChild className="contact-directions">
-                    <a href={contact.mapsSearchHref} {...externalLink}>
-                      {contactCopy.directions}
-                      <ArrowUpRight aria-hidden className="size-[16px]" />
-                    </a>
-                  </Button>
+                <div className="contact-card-footer">
+                  <div className="contact-directions-wrap">
+                    <Button variant="outline" asChild className="contact-directions">
+                      <a href={contact.mapsSearchHref} {...externalLink}>
+                        {contactCopy.directions}
+                        <ArrowUpRight aria-hidden className="size-[16px]" />
+                      </a>
+                    </Button>
+                  </div>
+                  <p className="contact-city">{contact.cityLabel}</p>
                 </div>
-                <p className="contact-city">{contact.cityLabel}</p>
               </section>
             </div>
 
@@ -116,20 +120,34 @@ export function ContactPage() {
                   <ArrowUpRight aria-hidden className="size-[16px]" />
                 </a>
               </div>
-              <a className="contact-map" href={contact.mapsSearchHref} {...externalLink}>
-                <span className="contact-map-pin">
-                  <MapPin aria-hidden className="size-[22px]" strokeWidth={1.75} />
-                </span>
-                <span className="contact-map-copy">
-                  <span className="contact-map-name">{contactCopy.mapTitle}</span>
-                  <span className="contact-map-address">
-                    {contact.addressLines[0]}
-                    <br />
-                    {contact.addressLines[1]}
+              <div className="contact-map">
+                <iframe
+                  className="contact-map-frame"
+                  title={`${contactCopy.mapTitle}, ${contact.addressLines.join(', ')}`}
+                  src={contact.mapsEmbedHref}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                />
+                <div className="contact-map-veil" aria-hidden="true" />
+                <a className="contact-map-hit" href={contact.mapsSearchHref} {...externalLink}>
+                  <span className="contact-map-card">
+                    <span className="contact-map-pin">
+                      <MapPin aria-hidden className="size-[22px]" strokeWidth={1.75} />
+                    </span>
+                    <span className="contact-map-copy">
+                      <span className="contact-map-name">{contactCopy.mapTitle}</span>
+                      <span className="contact-map-address">
+                        {contact.addressLines[0]}
+                        <br />
+                        {contact.addressLines[1]}
+                      </span>
+                      <span className="contact-map-note">{contactCopy.mapNote}</span>
+                    </span>
                   </span>
-                  <span className="contact-map-note">{contactCopy.mapNote}</span>
-                </span>
-              </a>
+                </a>
+              </div>
             </section>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, {getImageProps} from 'next/image';
 import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
 import {Button} from '@/src/shared/ui/button';
@@ -30,6 +30,44 @@ function HeadingLines({
   );
 }
 
+function AboutHeroMedia() {
+  const alt = aboutImages.hero.alt;
+  const shared = {alt, sizes: '100vw'} as const;
+  const {
+    props: {srcSet: desktopSrcSet},
+  } = getImageProps({
+    ...shared,
+    width: aboutImages.hero.width,
+    height: aboutImages.hero.height,
+    src: aboutImages.hero.src,
+  });
+  const {props: mobile} = getImageProps({
+    ...shared,
+    width: aboutImages.heroMobile.width,
+    height: aboutImages.heroMobile.height,
+    src: aboutImages.heroMobile.src,
+  });
+
+  return (
+    <div className="about-hero-media">
+      <picture>
+        <source media="(min-width: 768px)" srcSet={desktopSrcSet} />
+        <img
+          alt={alt}
+          src={mobile.src}
+          srcSet={mobile.srcSet}
+          sizes="100vw"
+          width={aboutImages.heroMobile.width}
+          height={aboutImages.heroMobile.height}
+          fetchPriority="high"
+          decoding="async"
+          className="about-hero-image"
+        />
+      </picture>
+    </div>
+  );
+}
+
 export function AboutPage() {
   const {story, approach, brands, cta} = aboutCopy;
 
@@ -37,15 +75,7 @@ export function AboutPage() {
     <div className={`${siteFontClass} about-page flex-1`}>
       <main>
         <figure className="about-hero">
-          <Image
-            src={aboutImages.hero.src}
-            alt={aboutImages.hero.alt}
-            fill
-            priority
-            sizes="100vw"
-            quality={90}
-            className="about-hero-image"
-          />
+          <AboutHeroMedia />
           <div className="about-plaque-wrap">
             <div className="about-shell">
               <figcaption className="about-plaque">
@@ -134,13 +164,11 @@ export function AboutPage() {
 
         <section className="about-cta" aria-labelledby="about-cta-title">
           <div className="about-shell about-cta-inner about-cta-grid">
-            <div>
+            <div className="about-cta-lead">
               <p className="about-eyebrow">{cta.eyebrow}</p>
               <h2 id="about-cta-title">
                 {cta.heading.endsWith('.') ? cta.heading.slice(0, -1) : cta.heading}{cta.heading.endsWith('.') ? <span className="about-dot">.</span> : null}
               </h2>
-            </div>
-            <div>
               <p className="about-cta-copy">{cta.description}</p>
               <div className="about-cta-action">
                 <Button variant="accent" asChild className="about-cta-button h-[48px] px-[22px] text-[15px]">
@@ -151,6 +179,15 @@ export function AboutPage() {
                 </Button>
               </div>
             </div>
+            <figure className="about-cta-photo">
+              <Image
+                src={aboutImages.cta.src}
+                alt={aboutImages.cta.alt}
+                fill
+                sizes="(min-width: 900px) 620px, 100vw"
+                className="about-cta-image"
+              />
+            </figure>
           </div>
         </section>
       </main>

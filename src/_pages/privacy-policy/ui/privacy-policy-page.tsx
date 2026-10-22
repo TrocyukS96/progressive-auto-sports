@@ -10,7 +10,7 @@ export function PrivacyPolicyPage() {
       style={{fontFamily: 'var(--font-body), Inter, sans-serif'}}
     >
       <section aria-labelledby="privacy-title" className="bg-[#111315] text-[#F8F8F8]">
-        <div className="mx-auto max-w-[1120px] px-[20px] pt-[112px] pb-[40px] min-[768px]:px-[32px] min-[768px]:pt-[120px] min-[768px]:pb-[56px] min-[1024px]:px-[48px] min-[1024px]:pt-[128px]">
+        <div className="mx-auto max-w-[1120px] px-[20px] pt-[40px] pb-[40px] min-[768px]:px-[32px] min-[768px]:pt-[120px] min-[768px]:pb-[56px] min-[1024px]:px-[48px] min-[1024px]:pt-[128px]">
           <p className="text-[12px] font-medium tracking-[0.18em] text-[#C2C4C7] uppercase">{privacyIntro.eyebrow}</p>
           <h1 id="privacy-title" className="mt-[12px] max-w-[12ch] text-[40px] leading-[1.02] font-medium text-[#F8F8F8] [font-family:var(--font-display),sans-serif] min-[768px]:text-[56px]">
             {privacyIntro.title}

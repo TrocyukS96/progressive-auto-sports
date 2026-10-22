@@ -15,8 +15,8 @@ export type ParsedAlbum = {
 
 export const ALBUM_LEDE = 'A closer look at the details that make each car its own.';
 export const ALBUM_PERSPECTIVE = 'A progressive perspective.';
-export const INITIAL_VISIBLE = 7;
-export const REVEAL_BATCH = 12;
+/** One editorial mosaic — two frames, three, then two — is a single page. */
+export const PHOTOS_PER_PAGE = 7;
 
 const APPROVED_LEAD: Record<string, string> = {
   ferrari: 'Italian soul.',
@@ -30,7 +30,7 @@ export type AlbumMode = 'editorial' | 'grid';
 
 export type AlbumViewState = {
   selected: number;
-  visible: number;
+  page: number;
   mode: AlbumMode;
   lightbox: boolean;
 };
@@ -38,9 +38,11 @@ export type AlbumViewState = {
 export type AlbumAction =
   | {type: 'step'; delta: number}
   | {type: 'select'; index: number; lightbox?: boolean}
-  | {type: 'reveal'}
+  | {type: 'page'; page: number}
   | {type: 'mode'; mode: AlbumMode}
   | {type: 'lightbox'; open: boolean};
+
+export type AlbumPaginationItem = number | 'gap';
 
 export type MosaicTile = {
   span: number;
@@ -125,14 +127,34 @@ export function formatPhotoNumber(index: number) {
   return String(index + 1).padStart(2, '0');
 }
 
-export function initialVisible(total: number) {
+export function albumPageCount(total: number) {
   if (total <= 0) return 0;
-  return Math.min(INITIAL_VISIBLE, total);
+  return Math.ceil(total / PHOTOS_PER_PAGE);
 }
 
-export function revealCount(visible: number, total: number) {
-  if (visible >= total) return total;
-  return Math.min(total, visible + REVEAL_BATCH);
+export function clampAlbumPage(page: number, count: number) {
+  if (count <= 0) return 1;
+  return Math.min(Math.max(1, page), count);
+}
+
+export function albumPageStart(page: number, total: number) {
+  return (clampAlbumPage(page, albumPageCount(total)) - 1) * PHOTOS_PER_PAGE;
+}
+
+export function albumPaginationItems(current: number, count: number): AlbumPaginationItem[] {
+  if (count <= 1) return [];
+  if (count <= 7) return Array.from({length: count}, (_, index) => index + 1);
+  const wanted = new Set([1, count, current - 1, current, current + 1]);
+  const pages = [...wanted].filter((page) => page >= 1 && page <= count).sort((left, right) => left - right);
+  const result: AlbumPaginationItem[] = [];
+  for (let index = 0; index < pages.length; index += 1) {
+    const page = pages[index];
+    if (page === undefined) continue;
+    const previous = pages[index - 1];
+    if (previous !== undefined && page - previous > 1) result.push('gap');
+    result.push(page);
+  }
+  return result;
 }
 
 export function stepIndex(index: number, delta: number, total: number) {
@@ -141,7 +163,7 @@ export function stepIndex(index: number, delta: number, total: number) {
 }
 
 export function createAlbumState(total: number): AlbumViewState {
-  return {selected: 0, visible: initialVisible(total), mode: 'editorial', lightbox: false};
+  return {selected: 0, page: clampAlbumPage(1, albumPageCount(total)), mode: 'editorial', lightbox: false};
 }
 
 export function reduceAlbumView(state: AlbumViewState, action: AlbumAction, total: number): AlbumViewState {
@@ -154,8 +176,10 @@ export function reduceAlbumView(state: AlbumViewState, action: AlbumAction, tota
       if (total <= 0 || action.index < 0 || action.index >= total) return state;
       return {...state, selected: action.index, lightbox: action.lightbox ?? state.lightbox};
     }
-    case 'reveal':
-      return {...state, visible: revealCount(state.visible, total)};
+    case 'page': {
+      const page = clampAlbumPage(action.page, albumPageCount(total));
+      return state.page === page ? state : {...state, page};
+    }
     case 'mode':
       return state.mode === action.mode ? state : {...state, mode: action.mode};
     case 'lightbox':
@@ -255,6 +279,30 @@ export function buildGalleryAlbum(input: {
     })),
     next: next ? {href: next.href, name: next.name, image: next.image} : null,
   };
+}
+
+export function mosaicLeadIndexes(tiles: MosaicTile[]) {
+  const rows = mosaicRows(tiles);
+  const leads = new Set<number>();
+  if (!rows) return leads;
+
+  let offset = 0;
+  for (const row of rows) {
+    let lead = 0;
+    let score = -1;
+    row.forEach((tile, index) => {
+      const [width, height] = tile.aspect.split('/').map((part) => Number(part.trim()));
+      const next = tile.span * (height / width);
+      if (next > score) {
+        score = next;
+        lead = index;
+      }
+    });
+    leads.add(offset + lead);
+    offset += row.length;
+  }
+
+  return leads;
 }
 
 export function mosaicRows(tiles: MosaicTile[]) {

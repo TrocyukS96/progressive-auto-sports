@@ -21,8 +21,8 @@
 
 .sales-page h1 {
   color: #f8f8f8;
-  font-size: clamp(28px, calc((100vw - 48px) / 9.4), 40px);
-  line-height: 1.17;
+  font-size: 32px;
+  line-height: 1.2;
 }
 
 .sales-page h2 {
@@ -49,6 +49,8 @@
 
 .sales-hero {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: #111315;
   color: #f8f8f8;
 }
@@ -56,20 +58,22 @@
 .sales-hero-copy {
   position: relative;
   z-index: 1;
+  order: 2;
   background: #111315;
-  padding-top: 112px;
+  padding-top: 20px;
   padding-bottom: 28px;
 }
 
 .sales-hero-media {
   position: relative;
+  order: 1;
   width: 100%;
   overflow: hidden;
   background: #111315;
 }
 
 .sales-hero-media img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
 }
 
@@ -254,6 +258,15 @@
 @media (min-width: 768px) {
   .sales-page h1 {
     font-size: 42px;
+    line-height: 1.17;
+  }
+
+  .sales-hero-media {
+    order: 2;
+  }
+
+  .sales-hero-media img {
+    object-fit: cover;
   }
 
   .sales-page h2 {
@@ -265,6 +278,7 @@
   }
 
   .sales-hero-copy {
+    order: 1;
     padding-top: 120px;
     padding-bottom: 36px;
   }

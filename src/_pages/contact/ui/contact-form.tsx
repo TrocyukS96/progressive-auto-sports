@@ -15,12 +15,11 @@ import {
 
 type ContactFormProps = {
   email: string;
-  emailHref: string;
 };
 
 const emptyFields: InquiryFields = {name: '', email: '', phone: '', message: ''};
 
-export function ContactForm({email, emailHref}: ContactFormProps) {
+export function ContactForm({email}: ContactFormProps) {
   const [fields, setFields] = useState<InquiryFields>(emptyFields);
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [attempted, setAttempted] = useState(false);
@@ -75,6 +74,7 @@ export function ContactForm({email, emailHref}: ContactFormProps) {
 
   return (
     <form className="contact-form" noValidate onSubmit={onSubmit}>
+      <div className="contact-form-body">
       <p className="contact-eyebrow contact-eyebrow-dark">{contactCopy.formEyebrow}</p>
       <h2 id="contact-form-title" className="contact-form-heading">
         {contactCopy.formHeading}<span className="contact-dot">.</span>
@@ -151,34 +151,13 @@ export function ContactForm({email, emailHref}: ContactFormProps) {
           />
         </Field>
       </div>
+      </div>
 
       <div className="contact-actions">
-        <Button type="submit" variant="accent" className="contact-submit" aria-describedby="contact-prepare-hint">
+        <Button type="submit" variant="accent" className="contact-submit">
           {contactCopy.button}
           <ArrowUpRight aria-hidden className="size-[16px]" />
         </Button>
-        <div className="contact-hints" id="contact-prepare-hint">
-          {contactCopy.hints.map((line) => (
-            <p key={line} className="contact-hint">
-              {line}
-            </p>
-          ))}
-        </div>
-        <div className="contact-direct">
-          <p className="contact-hint">
-            {contactCopy.directLabel}{' '}
-            <a className="contact-inline-mail" href={emailHref}>
-              {email}
-            </a>
-          </p>
-          <button
-            type="button"
-            className="contact-copy"
-            onClick={() => copyText(email, contactCopy.copiedEmail)}
-          >
-            {contactCopy.copyEmail}
-          </button>
-        </div>
         {notice === 'too-long' ? (
           <button
             type="button"

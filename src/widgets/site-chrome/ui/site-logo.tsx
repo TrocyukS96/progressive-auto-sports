@@ -6,13 +6,15 @@ type SiteLogoProps = {
   className?: string;
   imageClassName?: string;
   priority?: boolean;
+  onClick?: () => void;
 };
 
-export function SiteLogo({className, imageClassName, priority = false}: SiteLogoProps) {
+export function SiteLogo({className, imageClassName, priority = false, onClick}: SiteLogoProps) {
   return (
     <Link
       href="/"
       aria-label="Progressive Autosports, home"
+      onClick={onClick}
       className={cn(
         'inline-flex items-center gap-[8px] no-underline min-[1024px]:gap-[10px]',
         className,

@@ -54,10 +54,19 @@ export const aboutImages = {
     height: 600,
     alt: 'Black Bentley convertible with gold wheels in front of the Progressive Autosports mural',
   },
+  heroMobile: {
+    src: '/images/about/hero-mobile.jpg',
+    width: 576,
+    height: 1024,
+  },
   wheel: {
     src: '/images/about-reference/wheel-detail.webp',
     width: 452,
     height: 346,
     alt: 'Close-up of a gold wheel on a black Bentley',
+  },
+  cta: {
+    src: '/images/home/card-bentley.jpg',
+    alt: 'Yellow Bentley Continental GT with custom silver and yellow wheels',
   },
 } as const;

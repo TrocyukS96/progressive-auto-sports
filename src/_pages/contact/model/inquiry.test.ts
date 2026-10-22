@@ -78,6 +78,12 @@ test('directions search the configured showroom address', () => {
   assert.equal(url.pathname, '/maps/search/');
   assert.equal(url.searchParams.get('query'), contact.addressLines.join(', '));
   assert.equal(url.searchParams.get('query'), '14037 Stuebner Airline Rd, Houston, TX 77069');
+  const embed = new URL(contact.mapsEmbedHref);
+  assert.equal(embed.origin, 'https://maps.google.com');
+  assert.equal(embed.pathname, '/maps');
+  assert.equal(embed.searchParams.get('output'), 'embed');
+  assert.equal(embed.searchParams.get('q'), '29.989045,-95.499824');
+  assert.equal(embed.searchParams.get('z'), '15');
   assert.equal(contact.emailHref, `mailto:${contact.email}`);
   assert.equal(contact.phoneHref, `tel:${contact.phoneDisplay}`);
 });

@@ -7,6 +7,7 @@ export function isOverlayHeader(pathname: string) {
     current === '/sales/' ||
     current === '/privacy-policy/' ||
     current.startsWith('/wheels/') ||
-    current.startsWith('/galleries/')
+    current.startsWith('/galleries/') ||
+    current.startsWith('/gallery/')
   );
 }

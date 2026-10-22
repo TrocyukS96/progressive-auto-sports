@@ -1,14 +1,24 @@
 'use client';
 
-import Image from 'next/image';
-import {useEffect, useRef, type KeyboardEvent} from 'react';
+import {getImageProps} from 'next/image';
+import {ChevronLeft, ChevronRight} from 'lucide-react';
+import {useEffect, useRef, type CSSProperties, type KeyboardEvent} from 'react';
 import {Carousel, CarouselContent, CarouselItem, useCarousel} from '@/src/shared/ui/carousel';
 import {cn} from '@/src/shared/lib/cn';
 import type {HomeSlide} from '@/src/_pages/home/config/content';
 
-const frameClass = 'relative h-[100dvh] w-full';
+const frameClass =
+  'home-hero-frame relative h-[100dvh] w-full overflow-hidden bg-[#111315] min-[768px]:aspect-[3/2] min-[768px]:h-auto min-[1024px]:aspect-auto min-[1024px]:h-[100dvh]';
 const heroCarouselOpts = {duration: 50};
 const autoplayDelay = 7000;
+const arrowClass =
+  'home-hero-arrow inline-flex size-[44px] items-center justify-center rounded-full border border-white/40 bg-[#111315]/45 p-0 text-[#F8F8F8] backdrop-blur-[8px] focus-visible:shadow-[0_0_0_3px_#CD202B]';
+
+const desktopFrame: Record<string, {width: number; height: number}> = {
+  '/images/home/hero-mclaren.jpg': {width: 1170, height: 600},
+  '/images/home/hero-range-rover.jpg': {width: 1503, height: 1000},
+  '/images/home/hero-viper.jpg': {width: 2000, height: 1331},
+};
 
 function HeroAutoplay() {
   const {api} = useCarousel();
@@ -65,6 +75,41 @@ function HeroAutoplay() {
   return null;
 }
 
+function HeroPhoto({slide, priority}: {slide: HomeSlide; priority: boolean}) {
+  const frame = desktopFrame[slide.src] ?? {width: 1600, height: 900};
+  const shared = {alt: slide.alt, sizes: '100vw'} as const;
+  const {
+    props: {srcSet: desktopSrcSet},
+  } = getImageProps({...shared, width: frame.width, height: frame.height, src: slide.src});
+  const {props: mobile} = getImageProps({...shared, width: 576, height: 1024, src: slide.mobileSrc});
+
+  return (
+    <picture className="absolute inset-0 block">
+      <source media="(min-width: 768px)" srcSet={desktopSrcSet} />
+      <img
+        alt={mobile.alt}
+        src={mobile.src}
+        srcSet={mobile.srcSet}
+        sizes={mobile.sizes}
+        width={576}
+        height={1024}
+        loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
+        decoding="async"
+        draggable={false}
+        className="home-hero-photo"
+        style={
+          {
+            '--hero-position': slide.objectPosition,
+            '--hero-tablet-position': slide.mobileObjectPosition ?? slide.objectPosition,
+            '--hero-portrait-position': slide.portraitPosition ?? 'center center',
+          } as CSSProperties
+        }
+      />
+    </picture>
+  );
+}
+
 function HeroSlides({slides}: {slides: HomeSlide[]}) {
   const {selectedIndex} = useCarousel();
 
@@ -82,16 +127,7 @@ function HeroSlides({slides}: {slides: HomeSlide[]}) {
               aria-hidden={active ? undefined : true}
               inert={active ? undefined : true}
             >
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                priority={index === 0}
-                sizes="100vw"
-                draggable={false}
-                className="object-cover"
-                style={{objectPosition: slide.objectPosition}}
-              />
+              <HeroPhoto slide={slide} priority={index === 0} />
             </div>
           </CarouselItem>
         );
@@ -127,9 +163,16 @@ function HeroControls({slides}: {slides: HomeSlide[]}) {
   };
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-[8px] flex justify-center">
+    <div className="home-hero-controls">
+      {slides.length > 1 ? (
+        <button type="button" className={arrowClass} aria-label="Previous slide" onClick={() => api?.scrollPrev()}>
+          <ChevronLeft aria-hidden className="size-[18px]" />
+        </button>
+      ) : (
+        <span className="home-hero-arrow" aria-hidden />
+      )}
       <div
-        className="pointer-events-auto flex items-center rounded-full bg-[#111315]/55 px-[4px]"
+        className="home-hero-dots flex items-center rounded-full px-[4px]"
         role="group"
         aria-label="Choose a slide"
         onKeyDown={onKeyDown}
@@ -143,7 +186,7 @@ function HeroControls({slides}: {slides: HomeSlide[]}) {
                 buttons.current[index] = node;
               }}
               type="button"
-              className="inline-flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0"
+              className="inline-flex h-[44px] w-[44px] items-center justify-center border-0 bg-transparent p-0 focus-visible:shadow-[0_0_0_3px_#CD202B]"
               aria-label={`Show slide ${index + 1} of ${slides.length}: ${slide.alt}`}
               aria-pressed={selected}
               aria-current={selected ? 'true' : undefined}
@@ -159,6 +202,13 @@ function HeroControls({slides}: {slides: HomeSlide[]}) {
           );
         })}
       </div>
+      {slides.length > 1 ? (
+        <button type="button" className={arrowClass} aria-label="Next slide" onClick={() => api?.scrollNext()}>
+          <ChevronRight aria-hidden className="size-[18px]" />
+        </button>
+      ) : (
+        <span className="home-hero-arrow" aria-hidden />
+      )}
     </div>
   );
 }
@@ -168,25 +218,22 @@ function HeroChrome({slides}: {slides: HomeSlide[]}) {
   const slide = slides[selectedIndex];
 
   return (
-    <div className="pointer-events-none absolute inset-0">
-      <div className="absolute inset-x-0 top-0 h-[120px] bg-gradient-to-b from-black/45 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-[240px] bg-gradient-to-t from-black/65 to-transparent" />
-      <div className="absolute inset-x-0 bottom-[88px] px-[16px] min-[768px]:px-[32px]">
-        <div className="mx-auto max-w-[1280px]">
-          <div
-            key={slide.src}
-            className="home-caption inline-flex max-w-[min(100%,440px)] items-stretch overflow-hidden rounded-l-[4px] rounded-r-[16px] border border-white/15 bg-[#111315]/55 backdrop-blur-[12px]"
-          >
-            <span aria-hidden className="w-[4px] shrink-0 bg-[#ED343B]" />
-            <span className="px-[16px] py-[14px] min-[1024px]:px-[20px] min-[1024px]:py-[18px]">
-              <span className="block text-[24px] leading-[1.12] text-[#F8F8F8] [font-family:var(--font-display),sans-serif] min-[1024px]:text-[32px]">
-                {slide.title}
-              </span>
-              <span className="mt-[8px] block text-[14px] leading-[1.45] text-[#C2C4C7] min-[1024px]:text-[15px]">
-                {slide.description}
-              </span>
+    <div className="home-hero-caption">
+      <div className="mx-auto max-w-[1280px]">
+        <div
+          key={slide.src}
+          className="home-caption inline-flex w-full max-w-[min(100%,340px)] items-stretch overflow-hidden rounded-l-[4px] rounded-r-[16px] border border-white/15 bg-[#111315]/78 backdrop-blur-[12px] min-[768px]:max-w-[min(100%,440px)] min-[768px]:bg-[#1A1C20] min-[768px]:backdrop-blur-none min-[1024px]:bg-[#111315]/55 min-[1024px]:backdrop-blur-[12px]"
+        >
+          <span aria-hidden className="block w-[4px] shrink-0 bg-[#ED343B]" />
+          <span className="block px-[14px] py-[12px] min-[1024px]:px-[20px] min-[1024px]:py-[18px]">
+            <span className="block text-[26px] leading-[1.12] text-[#F8F8F8] [font-family:var(--font-display),sans-serif] min-[360px]:text-[28px] min-[768px]:text-[32px] min-[768px]:leading-[1.15] min-[1024px]:text-[60px] min-[1024px]:leading-[1.12]">
+              {slide.title.endsWith('.') ? slide.title.slice(0, -1) : slide.title}
+              {slide.title.endsWith('.') ? <span className="text-[#ED343B]">.</span> : null}
             </span>
-          </div>
+            <span className="mt-[6px] block text-[14px] leading-[1.4] text-[#C2C4C7] min-[1024px]:mt-[8px] min-[1024px]:text-[15px]">
+              {slide.description}
+            </span>
+          </span>
         </div>
       </div>
     </div>
@@ -195,14 +242,24 @@ function HeroChrome({slides}: {slides: HomeSlide[]}) {
 
 export function HeroSlider({slides}: {slides: HomeSlide[]}) {
   return (
-    <Carousel label="Featured vehicles" opts={heroCarouselOpts}>
+    <Carousel
+      label="Featured vehicles"
+      opts={heroCarouselOpts}
+      className="flex flex-col bg-[#111315] min-[768px]:pt-[96px] min-[1024px]:block min-[1024px]:pt-0"
+    >
       <HeroAutoplay />
-      <HeroSlides slides={slides} />
+      <div className="relative order-1">
+        <HeroSlides slides={slides} />
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-x-0 top-0 h-[140px] bg-gradient-to-b from-black/50 to-transparent min-[768px]:h-[72px] min-[768px]:from-black/35 min-[1024px]:h-[120px] min-[1024px]:from-black/45" />
+          <div className="home-hero-bottom-shade absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/72 to-transparent min-[1024px]:from-black/65" />
+        </div>
+      </div>
       <HeroChrome slides={slides} />
+      <HeroControls slides={slides} />
       <p className="sr-only" aria-live="polite">
         <SlideStatus count={slides.length} />
       </p>
-      <HeroControls slides={slides} />
     </Carousel>
   );
 }

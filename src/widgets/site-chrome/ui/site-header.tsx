@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {ArrowUpRight, Menu} from 'lucide-react';
+import {ArrowUpRight, ChevronRight, Menu, X} from 'lucide-react';
 import {useEffect, useState} from 'react';
 import {cn} from '@/src/shared/lib/cn';
 import {Button} from '@/src/shared/ui/button';
-import {Sheet, SheetContent, SheetTrigger} from '@/src/shared/ui/sheet';
+import {Sheet, SheetClose, SheetContent, SheetTrigger} from '@/src/shared/ui/sheet';
 import {siteFontClass} from '../config/fonts';
 import {onlineStoreLink, primaryNav} from '../config/content';
 import {isOverlayHeader} from '../model/is-overlay-header';
@@ -31,9 +31,15 @@ function isCurrent(pathname: string, href: string) {
 
 const chromeFont = {fontFamily: 'var(--font-body), Inter, sans-serif'} as const;
 
+function isFullBleedHeader(pathname: string) {
+  const current = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  return current === '/' || current === '/about/' || current === '/wheels/' || current === '/galleries/' || /^\/galleries\/page\/\d+\/$/.test(current);
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const bar = !isOverlayHeader(pathname);
+  const homeOverlay = !bar && isFullBleedHeader(pathname);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -50,9 +56,11 @@ export function SiteHeader() {
       style={chromeFont}
       className={cn(
         'home-header z-30 text-[#F8F8F8]',
-        bar
-          ? 'fixed inset-x-0 top-0 h-[72px] bg-[#111315] min-[1024px]:h-[84px]'
-          : 'fixed inset-x-0 top-0 bg-transparent px-[12px] pt-[10px] min-[768px]:px-[24px] min-[1024px]:pt-[14px]',
+        homeOverlay
+          ? 'fixed inset-x-0 top-0 bg-transparent px-[12px] pt-[10px] min-[768px]:px-[24px] min-[1024px]:pt-[14px]'
+          : bar
+            ? 'fixed inset-x-0 top-0 h-[72px] bg-[#111315] min-[1024px]:h-[84px]'
+            : 'relative inset-x-0 top-0 bg-[#111315] px-[12px] pt-[10px] pb-[10px] min-[768px]:fixed min-[768px]:bg-transparent min-[768px]:px-[24px] min-[768px]:pb-0 min-[1024px]:pt-[14px]',
       )}
     >
       <div
@@ -116,31 +124,57 @@ export function SiteHeader() {
                 <Menu aria-hidden className="size-[22px]" />
               </Button>
             </SheetTrigger>
-            <SheetContent title="Menu" className={siteFontClass} style={{fontFamily: 'var(--font-body), Inter, sans-serif'}}>
-              <nav className="flex flex-col" aria-label="Mobile">
-                {primaryNav.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="home-nav-link inline-flex min-h-[44px] items-center text-[18px] font-medium text-[#F8F8F8] no-underline [font-family:var(--font-body),sans-serif]"
-                    aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}
-                    onClick={() => setOpen(false)}
+            <SheetContent
+              hideHeader
+              title="Menu"
+              className={`${siteFontClass} site-menu-panel w-[min(74vw,400px)] bg-[#0E0F11] px-[18px] pt-[14px] pb-[max(16px,env(safe-area-inset-bottom))]`}
+              style={chromeFont}
+            >
+              <div className="flex min-h-0 flex-1 flex-col">
+                <div className="flex items-center justify-between gap-[12px] border-b border-white/10 pb-[14px]">
+                  <SiteLogo onClick={() => setOpen(false)} />
+                  <SheetClose
+                    className="site-menu-close -mr-[8px] inline-flex size-[44px] shrink-0 items-center justify-center rounded-[10px] border-0 bg-transparent p-0 text-[#F8F8F8]"
+                    aria-label="Close menu"
                   >
-                    {item.label}
-                  </Link>
-                ))}
-                <a
-                  href={onlineStoreLink.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${onlineStoreLink.label}, opens in a new tab`}
-                  className="mt-[12px] inline-flex min-h-[44px] items-center gap-[8px] text-[18px] font-medium text-[#F8F8F8] no-underline"
-                  onClick={() => setOpen(false)}
-                >
-                  {onlineStoreLink.label}
-                  <ArrowUpRight aria-hidden className="size-[16px]" />
-                </a>
-              </nav>
+                    <X aria-hidden className="size-[22px]" strokeWidth={1.75} />
+                  </SheetClose>
+                </div>
+                <nav className="mt-[22px] flex min-h-0 flex-1 flex-col overflow-y-auto" aria-labelledby="mobile-explore-label">
+                  <p id="mobile-explore-label" className="m-0 px-[14px] text-[12px] font-medium tracking-[0.16em] text-[#A3A7AC] uppercase">
+                    Explore
+                  </p>
+                  <ul className="m-0 mt-[16px] flex list-none flex-col gap-[2px] p-0">
+                    {primaryNav.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="site-menu-link flex min-h-[52px] items-center justify-between gap-[12px] rounded-[12px] px-[14px] text-[20px] font-medium text-[#F8F8F8] no-underline transition-colors duration-300 motion-reduce:transition-none"
+                          aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                          <ChevronRight aria-hidden className="site-menu-chevron size-[18px] shrink-0 text-[#C2C4C7]" strokeWidth={1.75} />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <div className="mt-[18px] shrink-0 border-t border-white/10 pt-[18px]">
+                  <Button variant="accent" asChild className="site-menu-store relative h-[54px] w-full rounded-[12px] px-[18px] text-[16px] font-semibold">
+                    <a
+                      href={onlineStoreLink.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${onlineStoreLink.label}, opens in a new tab`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {onlineStoreLink.label}
+                      <ArrowUpRight aria-hidden className="absolute right-[18px] size-[18px]" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

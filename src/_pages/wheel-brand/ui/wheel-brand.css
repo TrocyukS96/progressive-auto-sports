@@ -1,15 +1,3 @@
-@media (min-width: 1024px) {
-  .wheel-brand-hero {
-    min-height: calc(108px + 100vw * 809 / 1942);
-  }
-}
-
-@media (min-width: 1680px) {
-  .wheel-brand-hero {
-    min-height: 808px;
-  }
-}
-
 .wheel-brand-page h1,
 .wheel-brand-page h2,
 .wheel-brand-page h3,
@@ -32,30 +20,6 @@
 .wheel-brand-page a:focus,
 .wheel-brand-page a:focus-visible {
   text-decoration: none;
-}
-
-.wheel-brand-page .wheel-brand-crumbs {
-  position: relative;
-  z-index: 2;
-}
-
-.wheel-brand-page .wheel-brand-hero h1 {
-  margin-top: 22px;
-}
-
-.wheel-brand-page a.wheel-brand-crumb {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 2px;
-  color: #c2c4c7;
-}
-
-.wheel-brand-page a.wheel-brand-crumb:hover,
-.wheel-brand-page a.wheel-brand-crumb:focus-visible {
-  color: #f8f8f8;
 }
 
 .wheel-brand-page a.wheel-brand-accent,
@@ -97,8 +61,18 @@
   opacity: 1;
 }
 
+.wheel-brand-hero-media {
+  aspect-ratio: var(--wheel-hero-aspect, 1942 / 809);
+}
+
 #brand-collection {
   scroll-margin-top: 88px;
+}
+
+@media (min-width: 768px) {
+  .wheel-brand-hero-media {
+    aspect-ratio: auto;
+  }
 }
 
 @media (min-width: 1024px) {

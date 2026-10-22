@@ -7,7 +7,7 @@ export function HomeCustomization() {
   return (
     <section className="bg-[#111315] text-[#F8F8F8]">
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-[28px] px-[16px] py-[64px] min-[768px]:px-[32px] min-[1024px]:grid-cols-2 min-[1024px]:gap-[56px] min-[1024px]:py-[84px]">
-        <div className="relative aspect-[19/10] overflow-hidden rounded-[8px]">
+        <div className="relative aspect-[39/20] overflow-hidden rounded-[8px]">
           <Image
             src={showroomPhoto.src}
             alt={showroomPhoto.alt}

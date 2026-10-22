@@ -2,16 +2,19 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import {
+  PHOTOS_PER_PAGE,
+  albumPageCount,
+  albumPageStart,
+  albumPaginationItems,
   buildGalleryAlbum,
+  clampAlbumPage,
   createAlbumState,
   formatPhotoNumber,
-  initialVisible,
   mosaicRows,
   mosaicTiles,
   parseAlbumHtml,
   photoAlt,
   reduceAlbumView,
-  revealCount,
   splitIntro,
   stepIndex,
   type AlbumNeighbor,
@@ -59,50 +62,57 @@ test('photo credit is not treated as a brand story', () => {
   assert.match(splitIntro('Ferrari S.p.A. is an Italian manufacturer.').about ?? '', /Ferrari/);
 });
 
-test('numbers, reveal windows, and empty albums stay inside the real total', () => {
+test('numbers and photo pages stay inside the real total', () => {
   assert.equal(formatPhotoNumber(0), '01');
   assert.equal(formatPhotoNumber(122), '123');
-  assert.equal(initialVisible(0), 0);
-  assert.equal(initialVisible(1), 1);
-  assert.equal(initialVisible(123), 7);
-  assert.equal(revealCount(7, 123), 19);
-  assert.equal(revealCount(120, 123), 123);
-  assert.equal(revealCount(123, 123), 123);
+  assert.equal(albumPageCount(0), 0);
+  assert.equal(albumPageCount(1), 1);
+  assert.equal(albumPageCount(PHOTOS_PER_PAGE), 1);
+  assert.equal(albumPageCount(PHOTOS_PER_PAGE + 1), 2);
+  assert.equal(albumPageCount(123), 18);
+  assert.equal(clampAlbumPage(0, 18), 1);
+  assert.equal(clampAlbumPage(20, 18), 18);
+  assert.equal(clampAlbumPage(1, 0), 1);
+  assert.deepEqual(albumPaginationItems(1, 1), []);
+  assert.deepEqual(albumPaginationItems(1, 3), [1, 2, 3]);
+  assert.deepEqual(albumPaginationItems(1, 18), [1, 2, 'gap', 18]);
+  assert.deepEqual(albumPaginationItems(8, 18), [1, 'gap', 7, 8, 9, 'gap', 18]);
   assert.equal(stepIndex(0, -1, 5), 4);
   assert.equal(stepIndex(4, 1, 5), 0);
   assert.equal(stepIndex(0, 1, 1), 0);
   assert.equal(stepIndex(0, 1, 0), 0);
 });
 
-test('one selection survives grid open, mode changes, and the loaded boundary', () => {
+test('one selection survives grid open, mode changes, and another page', () => {
   const total = 123;
   let state = createAlbumState(total);
-  assert.equal(state.visible, 7);
+  assert.equal(state.page, 1);
   assert.equal(state.lightbox, false);
 
   for (let step = 0; step < 20; step += 1) state = reduceAlbumView(state, {type: 'step', delta: 1}, total);
   assert.equal(state.selected, 20);
-  assert.equal(state.visible, 7);
+  assert.equal(state.page, 1);
 
   state = reduceAlbumView(state, {type: 'select', index: 100, lightbox: true}, total);
   assert.equal(state.selected, 100);
-  assert.equal(state.visible, 7);
+  assert.equal(state.page, 1);
   assert.equal(state.lightbox, true);
 
   state = reduceAlbumView(state, {type: 'lightbox', open: false}, total);
   assert.equal(state.selected, 100);
   assert.equal(state.lightbox, false);
 
-  state = reduceAlbumView(state, {type: 'reveal'}, total);
+  state = reduceAlbumView(state, {type: 'page', page: 4}, total);
   state = reduceAlbumView(state, {type: 'mode', mode: 'grid'}, total);
-  assert.equal(state.visible, 19);
+  assert.equal(state.page, 4);
   assert.equal(state.selected, 100);
   assert.equal(state.mode, 'grid');
+  assert.equal(reduceAlbumView(state, {type: 'page', page: 99}, total).page, 18);
 
   const single = reduceAlbumView(createAlbumState(1), {type: 'step', delta: -1}, 1);
   assert.equal(single.selected, 0);
   const empty = reduceAlbumView(createAlbumState(0), {type: 'select', index: 0, lightbox: true}, 0);
-  assert.equal(empty.visible, 0);
+  assert.equal(empty.page, 1);
   assert.equal(empty.lightbox, false);
 });
 
@@ -116,16 +126,17 @@ test('mosaic rows fill without holes for partial batches', () => {
   }
 });
 
-test('reveal adds the next slice once and keeps earlier ids', () => {
+test('each page is its own slice and the pages cover every photo once', () => {
   const ids = Array.from({length: 20}, (_, index) => `photo-${index}`);
-  let visible = initialVisible(ids.length);
-  const shown = ids.slice(0, visible);
-  while (visible < ids.length) {
-    const next = revealCount(visible, ids.length);
-    const added = ids.slice(visible, next);
-    assert.equal(added.some((id) => shown.includes(id)), false);
-    shown.push(...added);
-    visible = next;
+  const shown: string[] = [];
+  const count = albumPageCount(ids.length);
+  for (let page = 1; page <= count; page += 1) {
+    const start = albumPageStart(page, ids.length);
+    const slice = ids.slice(start, start + PHOTOS_PER_PAGE);
+    assert.equal(slice.some((id) => shown.includes(id)), false);
+    assert.ok(slice.length > 0);
+    assert.ok(slice.length <= PHOTOS_PER_PAGE);
+    shown.push(...slice);
   }
   assert.deepEqual(shown, ids);
 });
